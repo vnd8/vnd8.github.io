@@ -29,6 +29,7 @@
             <span class="hamburger"></span>
             <span class="hamburger"></span>
           </button>
+          <div class="nav-backdrop" id="nav-backdrop"></div>
           <div class="nav-menu">
             <a href="#home" data-translate="nav-home">Home</a>
             <a href="#about" data-translate="nav-about">About Me</a>
@@ -72,7 +73,7 @@
             A video editor that brings stories to life through creative editing and
             animation and a content creator
           </p>
-          <p class="hero-sub" data-translate="hero-sub">Check out my work below 👇</p>
+          <p class="hero-sub" data-translate="hero-sub">Check out my work 👇</p>
           <div class="scroll-indicator" aria-hidden="true">
             <div class="scroll-wheel"></div>
           </div>
@@ -281,8 +282,8 @@
           'nav-contact': 'Contact Me',
           'hero-badge': 'Video Editor • Motion Designer',
           'hero-title': 'Welcome, I\'m Anes',
-          'hero-lead': 'A video editor that brings stories to life through creative editing & animation and a content creator',
-          'hero-sub': 'Check out my work below 👇',
+          'hero-lead': 'video editor and content creator sometimes',
+          'hero-sub': 'Check out my work 👇',
           'about-title': 'About Me',
           'about-para-1': 'I\'m a video editor and motion designer driven by storytelling. I blend sharp visuals, purposeful pacing, and sound design to transform ideas into cohesive visual narratives.',
           'about-para-2': 'With experience spanning branded content, social clips, and animation, I collaborate with clients to deliver work that feels intentional, refined, and ready to captivate audiences.',
@@ -310,8 +311,8 @@
           'nav-contact': 'تواصل',
           'hero-badge': 'مونتاج • قرافيك',
           'hero-title': 'أهلاً، أنا أنس',
-          'hero-lead': ' انا ممنتج وقرافيك ديزاينر ومنشئ محتوى ',
-          'hero-sub': 'شوف شغلي تحت 👇',
+          'hero-lead': ' ممنتج وصانع محتوى احيانا ',
+          'hero-sub': 'شوف شغلي 👇',
           'about-title': 'نبذة عني',
           'about-para-1': 'أنا فيديو إيدتور ومصمم موشن قرافيك، أولويتي إحياء المحتوى قبل أي شيء. أشتغل على الصورة، الإيقاع، والهندسة الصوتية كعناصر متكاملة عشان أحوّل أي فكرة لتجربة بصرية متماسكة ومؤثرة.',
           'about-para-2': 'خبرتي تشمل محتوى العلامات التجارية، مقاطع السوشيال، والأنيميشن. أحرص دايم إن العمل يطلع بهوية واضحة، إحساس عالي، وجاهز يشد انتباه الجمهور من أول لقطة.',
@@ -336,10 +337,12 @@
       // Mobile menu toggle
       const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
       const navMenu = document.querySelector('.nav-menu');
+      const navBackdrop = document.getElementById('nav-backdrop');
       
       mobileMenuToggle.addEventListener('click', () => {
         navMenu.classList.toggle('active');
         mobileMenuToggle.classList.toggle('active');
+        navBackdrop.classList.toggle('active');
       });
 
       // Close mobile menu when clicking on a link
@@ -347,12 +350,24 @@
         link.addEventListener('click', () => {
           navMenu.classList.remove('active');
           mobileMenuToggle.classList.remove('active');
+          navBackdrop.classList.remove('active');
         });
+      });
+
+      // Close mobile menu when clicking backdrop
+      navBackdrop.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+        navBackdrop.classList.remove('active');
       });
 
       // Close mobile menu when clicking outside
       document.addEventListener('click', (e) => {
-        if (navMenu.classList.contains('active') && 
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (navMenu && navMenu.classList.contains('active') && 
+            mobileMenuToggle && 
             !navMenu.contains(e.target) && 
             !mobileMenuToggle.contains(e.target)) {
           navMenu.classList.remove('active');
