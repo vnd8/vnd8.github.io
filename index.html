@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -95,7 +95,6 @@
     </script>
   </head>
   <body>
-    <div class="cursor-light"></div>
     <header class="site-header">
       <div class="container nav-container">
         <a class="brand" href="#home" aria-label="Anes home">
@@ -145,136 +144,199 @@
 
     <main>
       <section id="home" class="hero" aria-labelledby="hero-title">
-        <div class="hero-content container">
-          <span class="hero-badge" data-translate="hero-badge">Video Editor • Motion Designer</span>
-          <h1 id="hero-title" data-translate="hero-title">Welcome, I'm Anes</h1>
-          <p class="hero-lead" data-translate="hero-lead">
-            A video editor that brings stories to life through creative editing and
-            animation and a content creator
-          </p>
-          <p class="hero-sub" data-translate="hero-sub">Check out my work 👇</p>
-          <div class="scroll-indicator" aria-hidden="true">
-            <div class="scroll-wheel"></div>
+        <div class="container hero-shell">
+          <div class="hero-grid">
+            <div class="hero-intro">
+              <span class="hero-badge" data-translate="hero-badge">Video Editor • Scriptwriter • Motion Designer</span>
+              <h1 id="hero-title" data-translate="hero-title">Welcome, I'm Anes</h1>
+              <p class="hero-lead" data-translate="hero-lead">
+                A video editor and scriptwriter who brings stories to life with purposeful editing,
+                animation, and creator-focused narratives.
+              </p>
+              <p class="hero-sub" data-translate="hero-sub">Check out my work 👇</p>
+              <div class="hero-actions">
+                <a class="button button-primary" href="#work" data-translate="hero-cta-primary">View Projects</a>
+                <a class="button button-ghost" href="#contact" data-translate="hero-cta-secondary">Let me cook your videos</a>
+              </div>
+              <ul class="hero-highlights">
+                <li>
+                  <span class="hero-highlight-number">120+</span>
+                  <span class="hero-highlight-label" data-translate="hero-highlight-1">Videos delivered</span>
+                </li>
+                <li>
+                  <span class="hero-highlight-number">04</span>
+                  <span class="hero-highlight-label" data-translate="hero-highlight-2">Creative suites &amp; scripts delivered</span>
+                </li>
+                <li>
+                  <span class="hero-highlight-number">48h</span>
+                  <span class="hero-highlight-label" data-translate="hero-highlight-3">Avg turnaround for shorts</span>
+                </li>
+              </ul>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+              <div class="hero-orbit">
+                <div class="hero-chip">
+                  <img src="assets/premiere.svg" alt="" />
+                </div>
+                <div class="hero-chip">
+                  <img src="assets/after-effects.svg" alt="" />
+                </div>
+                <div class="hero-chip">
+                  <img src="assets/photoshop.svg" alt="" />
+                </div>
+                <div class="hero-chip">
+                  <img src="assets/DaVinci_Resolve_17_logo.svg" alt="" />
+                </div>
+              </div>
+              <div class="hero-card hero-card-primary">
+                <span class="hero-card-label" data-translate="hero-card-title">Narrative-led editing &amp; scripts</span>
+                <span class="hero-card-note" data-translate="hero-card-note">From script draft to final delivery</span>
+              </div>
+              <div class="hero-card hero-card-secondary">
+                <span class="hero-card-metric">2:1</span>
+                <span class="hero-card-caption" data-translate="hero-card-subtitle">Cinematic aspect focus</span>
+              </div>
+            </div>
           </div>
+        </div>
+        <div class="scroll-prompt">
+          <span class="scroll-prompt-dot"></span>
+          <span class="scroll-prompt-label" data-translate="scroll-prompt-label">Scroll to explore</span>
         </div>
       </section>
 
       <section id="about" class="about" aria-labelledby="about-title">
-        <div class="container about-layout">
-          <figure class="about-visual">
-            <img src="7362021.png" alt="Portrait of Anes" />
-          </figure>
-          <div class="about-copy">
+        <div class="container about-shell">
+          <div class="about-intro">
+            <span class="section-tag" data-translate="about-tag">Profile</span>
             <h2 id="about-title" data-translate="about-title">About Me</h2>
-            <p data-translate="about-para-1">
-              I'm a video editor and motion designer driven by storytelling. I blend
-              sharp visuals, purposeful pacing, and sound design to transform ideas into
-              cohesive visual narratives.
+            <p class="about-lead" data-translate="about-para-1">
+              I'm a video editor, scriptwriter, and motion designer driven by storytelling. I blend
+              sharp visuals, purposeful pacing, and sound design to transform ideas into cohesive visual narratives.
             </p>
             <p data-translate="about-para-2">
-              With experience spanning branded content, social clips, and animation, I
-              collaborate with clients to deliver work that feels intentional, refined,
-              and ready to captivate audiences.
+              With experience spanning branded content, social clips, creator scripting, and animation, I collaborate with clients to deliver work that feels intentional, refined, and ready to captivate audiences.
             </p>
-            <div class="toolkit" aria-label="Creative toolkit">
-              <span class="toolkit-title" data-translate="tools-title">Tools</span>
-              <ul>
-                <li>
+            <div class="about-points">
+              <div class="about-point">
+                <h3 data-translate="about-point-1-title">Story-first approach</h3>
+                <p data-translate="about-point-1-copy">Every edit is shaped around the core narrative so each beat lands with purpose.</p>
+              </div>
+              <div class="about-point">
+                <h3 data-translate="about-point-2-title">Sound &amp; motion synergy</h3>
+                <p data-translate="about-point-2-copy">Sound design, color, and motion graphics move in sync to keep audiences immersed.</p>
+              </div>
+              <div class="about-point">
+                <h3 data-translate="about-point-3-title">Collaborative workflow</h3>
+                <p data-translate="about-point-3-copy">Transparent milestones, clear feedback loops, and fast turnarounds keep projects flowing.</p>
+              </div>
+            </div>
+          </div>
+          <aside class="about-profile" aria-label="Anes profile snapshot">
+            <div class="about-portrait">
+              <img src="7362021.png" alt="Portrait of Anes" />
+            </div>
+            <div class="toolset" aria-label="Creative toolkit">
+              <span class="toolset-title" data-translate="tools-title">Tools</span>
+              <ul class="toolset-list">
+                <li class="toolset-item">
                   <img src="assets/premiere.svg" alt="Adobe Premiere Pro" />
                   <span data-translate="tool-premiere">Premiere Pro</span>
                 </li>
-                <li>
+                <li class="toolset-item">
                   <img src="assets/after-effects.svg" alt="Adobe After Effects" />
                   <span data-translate="tool-aftereffects">After Effects</span>
                 </li>
-                <li>
+                <li class="toolset-item">
                   <img src="assets/photoshop.svg" alt="Adobe Photoshop" />
                   <span data-translate="tool-photoshop">Photoshop</span>
                 </li>
+                <li class="toolset-item">
+                  <img src="assets/DaVinci_Resolve_17_logo.svg" alt="DaVinci Resolve" />
+                  <span data-translate="tool-davinci">DaVinci Resolve</span>
+                </li>
               </ul>
             </div>
-          </div>
+          </aside>
         </div>
       </section>
 
       <section id="work" class="work" aria-labelledby="work-title">
-        <div class="container">
-          <h2 id="work-title" data-translate="work-title">Video Projects</h2>
+        <div class="container work-shell">
+          <div class="section-header">
+            <span class="section-tag" data-translate="work-tag">Selected work</span>
+            <h2 id="work-title" data-translate="work-title">Video Projects</h2>
+            <p class="section-lead" data-translate="work-intro">
+              A curated reel of narrative edits, kinetic titles, and branded content crafted for social, broadcast, and experiential activations.
+            </p>
+          </div>
           <div class="work-grid">
             <figure class="work-card">
-              <a
-                href="https://www.youtube.com/watch?v=xP1iEmdN9js&t"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <div
-                  class="work-thumb"
-                  style="background-image: url('https://img.youtube.com/vi/xP1iEmdN9js/hqdefault.jpg');"
-                >
-                  <span class="play-chip" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M8.5 6.5v11l9-5.5-9-5.5Z" />
-                    </svg>
-                  </span>
-                  <span class="sr-only">Video One – YouTube showcase</span>
-                </div>
+              <a class="work-thumb" href="https://www.youtube.com/watch?v=xP1iEmdN9js" target="_blank" rel="noreferrer">
+                <img src="https://img.youtube.com/vi/xP1iEmdN9js/hqdefault.jpg" alt="Thumbnail for Aerial city opener" loading="lazy" />
+                <span class="work-thumb-play" aria-hidden="true">
+                  <svg viewBox="0 0 68 48" role="img" focusable="false">
+                    <path class="yt-bg" d="M66.52 7.64a8 8 0 0 0-5.63-5.66C55.29.8 34 .8 34 .8s-21.29 0-26.89 1.18a8 8 0 0 0-5.63 5.66A84.78 84.78 0 0 0 0 24a84.78 84.78 0 0 0 1.48 16.36 8 8 0 0 0 5.63 5.66C12.71 47.2 34 47.2 34 47.2s21.29 0 26.89-1.18a8 8 0 0 0 5.63-5.66A84.78 84.78 0 0 0 68 24a84.78 84.78 0 0 0-1.48-16.36Z" />
+                    <path class="yt-play" d="m45 24-15-9v18l15-9z" />
+                  </svg>
+                </span>
+                <span class="work-thumb-footer">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M10 15.5 16 12l-6-3.5v7ZM23 7s-.2-1.6-.8-2.3a2.5 2.5 0 0 0-1.7-1.7C18.8 2.3 12 2.3 12 2.3s-6.8 0-8.6.7a2.5 2.5 0 0 0-1.7 1.7C1.2 5.4 1 7 1 7S.8 8.7.8 10.5v3c0 1.8.2 3.5.2 3.5s.2 1.6.8 2.3a2.8 2.8 0 0 0 1.8 1.7c1.4.4 6.4.7 6.4.7s6.8 0 8.6-.7a2.5 2.5 0 0 0 1.7-1.7c.6-.7.8-2.3.8-2.3s.2-1.7.2-3.5v-3C23.2 8.7 23 7 23 7Z" />
+                  </svg>
+                  <span data-translate="work-watch">Watch on YouTube</span>
+                </span>
               </a>
             </figure>
             <figure class="work-card">
-              <a
-                href="https://www.youtube.com/watch?v=PFrGQfljauE&t"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <div
-                  class="work-thumb"
-                  style="background-image: url('https://i.ytimg.com/vi/PFrGQfljauE/maxresdefault.jpg');"
-                >
-                  <span class="play-chip" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M8.5 6.5v11l9-5.5-9-5.5Z" />
-                    </svg>
-                  </span>
-                  <span class="sr-only">Video Two – YouTube showcase</span>
-                </div>
+              <a class="work-thumb" href="https://www.youtube.com/watch?v=LS26pR4jmJQ" target="_blank" rel="noreferrer">
+                <img src="https://img.youtube.com/vi/LS26pR4jmJQ/hqdefault.jpg" alt="Thumbnail for YouTuber reaction edit" loading="lazy" />
+                <span class="work-thumb-play" aria-hidden="true">
+                  <svg viewBox="0 0 68 48" role="img" focusable="false">
+                    <path class="yt-bg" d="M66.52 7.64a8 8 0 0 0-5.63-5.66C55.29.8 34 .8 34 .8s-21.29 0-26.89 1.18a8 8 0 0 0-5.63 5.66A84.78 84.78 0 0 0 0 24a84.78 84.78 0 0 0 1.48 16.36 8 8 0 0 0 5.63 5.66C12.71 47.2 34 47.2 34 47.2s21.29 0 26.89-1.18a8 8 0 0 0 5.63-5.66A84.78 84.78 0 0 0 68 24a84.78 84.78 0 0 0-1.48-16.36Z" />
+                    <path class="yt-play" d="m45 24-15-9v18l15-9z" />
+                  </svg>
+                </span>
+                <span class="work-thumb-footer">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M10 15.5 16 12l-6-3.5v7ZM23 7s-.2-1.6-.8-2.3a2.5 2.5 0 0 0-1.7-1.7C18.8 2.3 12 2.3 12 2.3s-6.8 0-8.6.7a2.5 2.5 0 0 0-1.7 1.7C1.2 5.4 1 7 1 7S.8 8.7.8 10.5v3c0 1.8.2 3.5.2 3.5s.2 1.6.8 2.3a2.8 2.8 0 0 0 1.8 1.7c1.4.4 6.4.7 6.4.7s6.8 0 8.6-.7a2.5 2.5 0 0 0 1.7-1.7c.6-.7.8-2.3.8-2.3s.2-1.7.2-3.5v-3C23.2 8.7 23 7 23 7Z" />
+                  </svg>
+                  <span data-translate="work-watch">Watch on YouTube</span>
+                </span>
               </a>
             </figure>
             <figure class="work-card">
-              <a
-                href="https://www.youtube.com/watch?v=XOO0BsXTfn0&t"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <div
-                  class="work-thumb"
-                  style="background-image: url('https://img.youtube.com/vi/XOO0BsXTfn0/hqdefault.jpg');"
-                >
-                  <span class="play-chip" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M8.5 6.5v11l9-5.5-9-5.5Z" />
-                    </svg>
-                  </span>
-                  <span class="sr-only">Video Four – YouTube showcase</span>
-                </div>
+              <a class="work-thumb" href="https://www.youtube.com/watch?v=XOO0BsXTfn0" target="_blank" rel="noreferrer">
+                <img src="https://img.youtube.com/vi/XOO0BsXTfn0/hqdefault.jpg" alt="Thumbnail for Immersive festival cut" loading="lazy" />
+                <span class="work-thumb-play" aria-hidden="true">
+                  <svg viewBox="0 0 68 48" role="img" focusable="false">
+                    <path class="yt-bg" d="M66.52 7.64a8 8 0 0 0-5.63-5.66C55.29.8 34 .8 34 .8s-21.29 0-26.89 1.18a8 8 0 0 0-5.63 5.66A84.78 84.78 0 0 0 0 24a84.78 84.78 0 0 0 1.48 16.36 8 8 0 0 0 5.63 5.66C12.71 47.2 34 47.2 34 47.2s21.29 0 26.89-1.18a8 8 0 0 0 5.63-5.66A84.78 84.78 0 0 0 68 24a84.78 84.78 0 0 0-1.48-16.36Z" />
+                    <path class="yt-play" d="m45 24-15-9v18l15-9z" />
+                  </svg>
+                </span>
+                <span class="work-thumb-footer">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M10 15.5 16 12l-6-3.5v7ZM23 7s-.2-1.6-.8-2.3a2.5 2.5 0 0 0-1.7-1.7C18.8 2.3 12 2.3 12 2.3s-6.8 0-8.6.7a2.5 2.5 0 0 0-1.7 1.7C1.2 5.4 1 7 1 7S.8 8.7.8 10.5v3c0 1.8.2 3.5.2 3.5s.2 1.6.8 2.3a2.8 2.8 0 0 0 1.8 1.7c1.4.4 6.4.7 6.4.7s6.8 0 8.6-.7a2.5 2.5 0 0 0 1.7-1.7c.6-.7.8-2.3.8-2.3s.2-1.7.2-3.5v-3C23.2 8.7 23 7 23 7Z" />
+                  </svg>
+                  <span data-translate="work-watch">Watch on YouTube</span>
+                </span>
               </a>
             </figure>
             <figure class="work-card">
-              <a
-                href="https://www.youtube.com/watch?v=LS26pR4jmJQ&t"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <div
-                  class="work-thumb"
-                  style="background-image: url('https://i.ytimg.com/vi/LS26pR4jmJQ/hqdefault.jpg');"
-                >
-                  <span class="play-chip" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M8.5 6.5v11l9-5.5-9-5.5Z" />
-                    </svg>
-                  </span>
-                  <span class="sr-only">Video Five – YouTube showcase</span>
-                </div>
+              <a class="work-thumb" href="https://www.youtube.com/watch?v=_kVE4VcQxrA" target="_blank" rel="noreferrer">
+                <img src="https://img.youtube.com/vi/_kVE4VcQxrA/hqdefault.jpg" alt="Thumbnail for Launch narrative" loading="lazy" />
+                <span class="work-thumb-play" aria-hidden="true">
+                  <svg viewBox="0 0 68 48" role="img" focusable="false">
+                    <path class="yt-bg" d="M66.52 7.64a8 8 0 0 0-5.63-5.66C55.29.8 34 .8 34 .8s-21.29 0-26.89 1.18a8 8 0 0 0-5.63 5.66A84.78 84.78 0 0 0 0 24a84.78 84.78 0 0 0 1.48 16.36 8 8 0 0 0 5.63 5.66C12.71 47.2 34 47.2 34 47.2s21.29 0 26.89-1.18a8 8 0 0 0 5.63-5.66A84.78 84.78 0 0 0 68 24a84.78 84.78 0 0 0-1.48-16.36Z" />
+                    <path class="yt-play" d="m45 24-15-9v18l15-9z" />
+                  </svg>
+                </span>
+                <span class="work-thumb-footer">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M10 15.5 16 12l-6-3.5v7ZM23 7s-.2-1.6-.8-2.3a2.5 2.5 0 0 0-1.7-1.7C18.8 2.3 12 2.3 12 2.3s-6.8 0-8.6.7a2.5 2.5 0 0 0-1.7 1.7C1.2 5.4 1 7 1 7S.8 8.7.8 10.5v3c0 1.8.2 3.5.2 3.5s.2 1.6.8 2.3a2.8 2.8 0 0 0 1.8 1.7c1.4.4 6.4.7 6.4.7s6.8 0 8.6-.7a2.5 2.5 0 0 0 1.7-1.7c.6-.7.8-2.3.8-2.3s.2-1.7.2-3.5v-3C23.2 8.7 23 7 23 7Z" />
+                  </svg>
+                  <span data-translate="work-watch">Watch on YouTube</span>
+                </span>
               </a>
             </figure>
           </div>
@@ -282,50 +344,53 @@
       </section>
 
       <section id="contact" class="contact" aria-labelledby="contact-title">
-        <div class="container contact-content">
-          <h2 id="contact-title" data-translate="contact-title">Contact Me</h2>
-          <div class="contact-links">
-            <a href="https://www.instagram.com/vnd8d/?hl=en" target="_blank" rel="noreferrer" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
-                <path
-                  d="M16 3.5H8A4.5 4.5 0 0 0 3.5 8v8A4.5 4.5 0 0 0 8 20.5h8a4.5 4.5 0 0 0 4.5-4.5V8A4.5 4.5 0 0 0 16 3.5Zm2.8 12.3a2.8 2.8 0 0 1-2.8 2.8H8a2.8 2.8 0 0 1-2.8-2.8V8A2.8 2.8 0 0 1 8 5.2h8a2.8 2.8 0 0 1 2.8 2.8Z"
-                />
-                <path
-                  d="M12 7.1a4.9 4.9 0 1 0 0 9.8 4.9 4.9 0 0 0 0-9.8Zm0 7.9a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"
-                />
-                <circle cx="17.6" cy="6.4" r="1.3" />
-              </svg>
-              <span data-translate="contact-instagram">Instagram</span>
-            </a>
-            <button
-              type="button"
-              class="contact-toggle"
-              data-target="discord-card"
-              aria-expanded="false"
-              aria-controls="discord-card"
-            >
-              <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
-                <path
-                  d="M20.32 4.37a19.74 19.74 0 0 0-4.98-1.51l-.4.8a17.61 17.61 0 0 0-5.86 0l-.4-.8a19.83 19.83 0 0 0-4.98 1.51c-2.36 3.42-3.35 7.6-2.98 11.75a20.16 20.16 0 0 0 6.02 3.07l.48-.99a12.66 12.66 0 0 1-1.95-.94l.26-.2a9.78 9.78 0 0 0 9.72 0l.26.2c-.62.38-1.28.7-1.96.94l.49.99a20.15 20.15 0 0 0 6.01-3.07c.51-5.33-.9-9.45-2.99-11.75ZM9.67 13.27c-.76 0-1.38-.7-1.38-1.56s.62-1.56 1.38-1.56S11.05 10.85 11.05 11.7 10.43 13.27 9.67 13.27Zm4.66 0c-.76 0-1.38-.7-1.38-1.56s.62-1.56 1.38-1.56 1.38.7 1.38 1.56-.62 1.56-1.38 1.56Z"
-                />
-              </svg>
-              <span data-translate="contact-discord">Discord</span>
-            </button>
-            <a href="https://wa.me/213555952379" target="_blank" rel="noreferrer" aria-label="WhatsApp">
-              <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
-                <path
-                  d="M20.52 3.48A11.9 11.9 0 0 0 4.41 18.8L3 22.75l4.07-1.07A11.87 11.87 0 0 0 12 24a11.9 11.9 0 0 0 8.52-20.52Zm-3.1 13c-.25.7-1.22 1.3-2 1.48-.5.11-1.18.21-3.45-.73-2.89-1.23-4.78-4.06-4.93-4.26-.16-.2-1.18-1.57-1.18-2.99 0-1.42.75-2.12 1.02-2.42.25-.27.66-.39 1.06-.39h.15c.3 0 .7-.1 1.08.83l.37.88c.18.41.28.9.1 1.17-.17.28-.27.43-.5.68-.16.2-.34.44-.14.85.2.42.9 1.57 1.93 2.55 1.32 1.23 2.4 1.62 2.82 1.8.43.18.68.15.92-.09.28-.3.64-.78.98-1.26.25-.34.56-.39.9-.27.34.12 2.13 1 2.5 1.18.37.19.62.27.71.42.1.14.1.82-.15 1.52Z"
-                />
-              </svg>
-              <span data-translate="contact-whatsapp">WhatsApp</span>
-            </a>
+        <div class="container contact-shell">
+          <div class="contact-intro">
+            <span class="section-tag" data-translate="contact-tag">Connect</span>
+            <h2 id="contact-title" data-translate="contact-title">Contact Me</h2>
+            <p class="section-lead" data-translate="contact-lead">
+              Happy to work with you.
+            </p>
           </div>
-          <div id="discord-card" class="contact-card" hidden>
-            <span class="contact-handle">vnd8</span>
-            <img
-              src="Screenshot 2025-12-06 202524.png"
-              alt="Discord profile preview for vnd8"
-            />
+          <div class="contact-grid">
+            <a class="contact-card" href="https://www.instagram.com/vnd8d/?hl=en" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <span class="contact-card-icon">
+                <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                  <path d="M16 3.5H8A4.5 4.5 0 0 0 3.5 8v8A4.5 4.5 0 0 0 8 20.5h8a4.5 4.5 0 0 0 4.5-4.5V8A4.5 4.5 0 0 0 16 3.5Zm2.8 12.3a2.8 2.8 0 0 1-2.8 2.8H8a2.8 2.8 0 0 1-2.8-2.8V8A2.8 2.8 0 0 1 8 5.2h8a2.8 2.8 0 0 1 2.8 2.8Z" />
+                  <path d="M12 7.1a4.9 4.9 0 1 0 0 9.8 4.9 4.9 0 0 0 0-9.8Zm0 7.9a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
+                  <circle cx="17.6" cy="6.4" r="1.3" />
+                </svg>
+              </span>
+              <span class="contact-card-label" data-translate="contact-instagram">Instagram</span>
+              <span class="contact-card-note">@vnd8d</span>
+            </a>
+            <div class="contact-card">
+              <span class="contact-card-icon">
+                <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                  <path d="M20.32 4.37a19.74 19.74 0 0 0-4.98-1.51l-.4.8a17.61 17.61 0 0 0-5.86 0l-.4-.8a19.83 19.83 0 0 0-4.98 1.51c-2.36 3.42-3.35 7.6-2.98 11.75a20.16 20.16 0 0 0 6.02 3.07l.48-.99a12.66 12.66 0 0 1-1.95-.94l.26-.2a9.78 9.78 0 0 0 9.72 0l.26.2c-.62.38-1.28.7-1.96.94l.49.99a20.15 20.15 0 0 0 6.01-3.07c.51-5.33-.9-9.45-2.99-11.75ZM9.67 13.27c-.76 0-1.38-.7-1.38-1.56s.62-1.56 1.38-1.56S11.05 10.85 11.05 11.7 10.43 13.27 9.67 13.27Zm4.66 0c-.76 0-1.38-.7-1.38-1.56s.62-1.56 1.38-1.56 1.38.7 1.38 1.56-.62 1.56-1.38 1.56Z" />
+                </svg>
+              </span>
+              <span class="contact-card-label" data-translate="contact-discord">Discord</span>
+              <span class="contact-card-note"><code>vnd8</code></span>
+            </div>
+            <a class="contact-card" href="https://wa.me/213555952379" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+              <span class="contact-card-icon">
+                <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                  <path d="M20.52 3.48A11.9 11.9 0 0 0 4.41 18.8L3 22.75l4.07-1.07A11.87 11.87 0 0 0 12 24a11.9 11.9 0 0 0 8.52-20.52Zm-3.1 13c-.25.7-1.22 1.3-2 1.48-.5.11-1.18.21-3.45-.73-2.89-1.23-4.78-4.06-4.93-4.26-.16-.2-1.18-1.57-1.18-2.99 0-1.42.75-2.12 1.02-2.42.25-.27.66-.39 1.06-.39h.15c.3 0 .7-.1 1.08.83l.37.88c.18.41.28.9.1 1.17-.17.28-.27.43-.5.68-.16.2-.34.44-.14.85.2.42.9 1.57 1.93 2.55 1.32 1.23 2.4 1.62 2.82 1.8.43.18.68.15.92-.09.28-.3.64-.78.98-1.26.25-.34.56-.39.9-.27.34.12 2.13 1 2.5 1.18.37.19.62.27.71.42.1.14.1.82-.15 1.52Z" />
+                </svg>
+              </span>
+              <span class="contact-card-label" data-translate="contact-whatsapp">WhatsApp</span>
+              <span class="contact-card-note">+213 555 952 379</span>
+            </a>
+            <a class="contact-card" href="mailto:chattivon@gmail.com">
+              <span class="contact-card-icon">
+                <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                  <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v.01L12 13l8-6.99V6H4Zm16 12V9.24l-7.38 5.73a1 1 0 0 1-1.24 0L4 9.24V18h16Z" />
+                </svg>
+              </span>
+              <span class="contact-card-label" data-translate="contact-email">Email</span>
+              <span class="contact-card-note">chattivon@gmail.com</span>
+            </a>
           </div>
         </div>
       </section>
@@ -340,23 +405,48 @@
           'nav-about': 'About Me',
           'nav-work': 'Video Projects',
           'nav-contact': 'Contact Me',
-          'hero-badge': 'Video Editor • Motion Designer',
+          'hero-badge': 'Video Editor • Scriptwriter • Motion Designer',
           'hero-title': 'Welcome, I\'m Anes',
-          'hero-lead': 'video editor and content creator sometimes',
+          'hero-lead': 'A video editor and scriptwriter who brings stories to life with purposeful editing, animation, and creator-focused narratives.',
           'hero-sub': 'Check out my work 👇',
           'about-title': 'About Me',
-          'about-para-1': 'I\'m a video editor and motion designer driven by storytelling. I blend sharp visuals, purposeful pacing, and sound design to transform ideas into cohesive visual narratives.',
-          'about-para-2': 'With experience spanning branded content, social clips, and animation, I collaborate with clients to deliver work that feels intentional, refined, and ready to captivate audiences.',
+          'about-para-1': 'I\'m a video editor, scriptwriter, and motion designer driven by storytelling. I blend sharp visuals, purposeful pacing, and sound design to transform ideas into cohesive visual narratives.',
+          'about-para-2': 'With experience spanning branded content, social clips, creator scripting, and animation, I collaborate with clients to deliver work that feels intentional, refined, and ready to captivate audiences.',
+          'hero-cta-primary': 'View Projects',
+          'hero-cta-secondary': 'Let me cook your videos',
+          'hero-highlight-1': 'Videos delivered',
+          'hero-highlight-2': 'Creative suites & scripts delivered',
+          'hero-highlight-3': 'Avg turnaround for shorts',
+          'hero-card-title': 'Narrative-led editing & scripts',
+          'hero-card-note': 'From script draft to final delivery',
+          'hero-card-subtitle': 'Cinematic aspect focus',
+          'scroll-prompt-label': 'Scroll to explore',
           'tools-title': 'Tools',
           'tool-premiere': 'Premiere Pro',
           'tool-aftereffects': 'After Effects',
           'tool-photoshop': 'Photoshop',
+          'tool-davinci': 'DaVinci Resolve',
+          'about-tag': 'Profile',
+          'about-point-1-title': 'Story-first approach',
+          'about-point-1-copy': 'Every edit is shaped around the core narrative so each beat lands with purpose.',
+          'about-point-2-title': 'Sound & motion synergy',
+          'about-point-2-copy': 'Sound design, color, and motion graphics move in sync to keep audiences immersed.',
+          'about-point-3-title': 'Collaborative workflow',
+          'about-point-3-copy': 'Transparent milestones, clear feedback loops, and fast turnarounds keep projects flowing.',
+          'profile-role': 'Lead video editor & scriptwriter',
+          'profile-location': 'Based in Algeria, collaborating worldwide',
+          'profile-availability': 'Bookings open for Q1 2026',
+          'work-tag': 'Selected work',
+          'work-intro': 'A curated reel of narrative edits, kinetic titles, and branded content crafted for social, broadcast, and experiential activations.',
           'work-title': 'Video Projects',
           'thumbnails-title': 'Thumbnails',
           'contact-title': 'Contact Me',
+          'contact-tag': 'Connect',
+          'contact-lead': 'Happy to work with you.',
           'contact-instagram': 'Instagram',
           'contact-discord': 'Discord',
           'contact-whatsapp': 'WhatsApp',
+          'contact-email': 'Email',
           'footer-navigate': 'Navigate',
           'footer-work': 'My Projects',
           'footer-contact': 'Contact',
@@ -369,23 +459,48 @@
           'nav-about': 'نبذة عني',
           'nav-work': 'أعمالي',
           'nav-contact': 'تواصل',
-          'hero-badge': 'مونتاج • قرافيك',
+          'hero-badge': 'مونتاج • كتابة سكربتات • موشن',
           'hero-title': 'أهلاً، أنا أنس',
-          'hero-lead': ' ممنتج وصانع محتوى احيانا ',
+          'hero-lead': 'ممنتج وكاتب محتوى، أروي القصص بمونتاج مدروس وموشن وتحويل الأفكار لرواية موجهة للمبدعين.',
           'hero-sub': 'شوف شغلي 👇',
           'about-title': 'نبذة عني',
-          'about-para-1': 'أنا فيديو إيدتور ومصمم موشن قرافيك، أولويتي إحياء المحتوى قبل أي شيء. أشتغل على الصورة، الإيقاع، والهندسة الصوتية كعناصر متكاملة عشان أحوّل أي فكرة لتجربة بصرية متماسكة ومؤثرة.',
-          'about-para-2': 'خبرتي تشمل محتوى العلامات التجارية، مقاطع السوشيال، والأنيميشن. أحرص دايم إن العمل يطلع بهوية واضحة، إحساس عالي، وجاهز يشد انتباه الجمهور من أول لقطة.',
+          'about-para-1': 'أنا فيديو إيدتور، كاتب سكربتات، ومصمم موشن، أولويتي إحياء المحتوى قبل أي شيء. أشتغل على الصورة، الإيقاع، والهندسة الصوتية كعناصر متكاملة عشان أحوّل أي فكرة لتجربة بصرية متماسكة ومؤثرة.',
+          'about-para-2': 'خبرتي تشمل محتوى العلامات التجارية، مقاطع السوشيال، سكربتات لصناع المحتوى، والأنيميشن. أحرص دايم إن العمل يطلع بهوية واضحة، إحساس عالي، وجاهز يشد انتباه الجمهور من أول لقطة.',
+          'hero-cta-primary': 'شاهد الأعمال',
+          'hero-cta-secondary': 'دعني أطبخ لك محتواك',
+          'hero-highlight-1': 'فيديوهات منجزة',
+          'hero-highlight-2': 'برامج مستعمله ',
+          'hero-highlight-3': 'متوسط تسليم لمقاطع قصيرة',
+          'hero-card-title': 'مونتاج وسكربت بقيمة سردية',
+          'hero-card-note': 'من أول مسودة سكربت إلى التسليم النهائي',
+          'hero-card-subtitle': 'تركيز على الإطار السينمائي',
+          'scroll-prompt-label': 'انزل للاستكشاف',
           'tools-title': 'البرامج :',
           'tool-premiere': 'بريمير برو',
           'tool-aftereffects': 'أفتر إفكتس',
           'tool-photoshop': 'فوتوشوب',
+          'tool-davinci': 'دافينتشي ريزولف',
+          'about-tag': 'الملف الشخصي',
+          'about-point-1-title': 'القصة أولاً',
+          'about-point-1-copy': 'كل مونتاج مبني حول الرسالة الأساسية عشان كل لقطة توصل إحساسها.',
+          'about-point-2-title': 'تناغم الصوت والحركة',
+          'about-point-2-copy': 'الصوت، الألوان، والموشن يتحركون مع بعض عشان نحافظ على تفاعل المشاهد.',
+          'about-point-3-title': 'تعاون شفاف',
+          'about-point-3-copy': 'مراحل واضحة، ملاحظات مباشرة، وتسليم سريع يحافظ على سلاسة المشروع.',
+          'profile-role': 'مونتير رئيسي وكاتب سكربتات',
+          'profile-location': 'مقره الجزائر ويتعاون عالمياً',
+          'profile-availability': 'الحجوزات مفتوحة للربع الأول 2026',
+          'work-tag': 'أعمال مختارة',
+          'work-intro': 'مختارات من المونتاج السردي، العناوين الحركية، والمحتوى البراندي المخصص للسوشيال والبث والتجارب.',
           'work-title': 'مشاريع الفيديو',
           'thumbnails-title': 'الصور المصغرة',
           'contact-title': 'تواصل معي',
+          'contact-tag': 'تواصل',
+          'contact-lead': 'سعيد بالتعامل معك.',
           'contact-instagram': 'انستغرام',
           'contact-discord': 'ديسكورد',
           'contact-whatsapp': 'واتساب',
+          'contact-email': 'البريد الإلكتروني',
           'footer-navigate': 'تصفح',
           'footer-work': 'مشاريع الفيديو',
           'footer-contact': 'التواصل',
@@ -478,39 +593,11 @@
       // Initialize language on load
       updateLanguage(currentLang);
 
-      // Cursor light effect
-      const cursorLight = document.querySelector('.cursor-light');
-      
-      document.addEventListener('mousemove', (e) => {
-        cursorLight.style.left = e.clientX + 'px';
-        cursorLight.style.top = e.clientY + 'px';
-      });
-
-      document.addEventListener('mouseenter', () => {
-        cursorLight.style.opacity = '1';
-      });
-
-      document.addEventListener('mouseleave', () => {
-        cursorLight.style.opacity = '0';
-      });
-
-      document.addEventListener('mousedown', (e) => {
-        if (e.button === 0) { // Left click only
-          cursorLight.classList.add('clicking');
-        }
-      });
-
-      document.addEventListener('mouseup', (e) => {
-        if (e.button === 0) { // Left click only
-          cursorLight.classList.remove('clicking');
-        }
-      });
-
       // Theme toggle functionality
       const themeToggle = document.getElementById('theme-toggle');
       
-      // Check for saved theme preference or default to light
-      const currentTheme = localStorage.getItem('theme') || 'light';
+      // Check for saved theme preference or default to dark
+      const currentTheme = localStorage.getItem('theme') || 'dark';
       html.setAttribute('data-theme', currentTheme);
       
       themeToggle.addEventListener('click', () => {
@@ -585,7 +672,7 @@
           <img src="7362021.png" alt="Anes logo" />
           <strong>Anes Studio</strong>
           <p data-translate="footer-description">
-            Ready to take your content to the next level
+            Ready to take your content to the next level?
           </p>
         </div>
         <div class="footer-links">
@@ -611,11 +698,6 @@
     </script>
   </body>
 </html>
-
-
-
-
-
 
 
 
