@@ -1,744 +1,592 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Portfolio of Anes, a video editor and motion designer blending storytelling, sharp visuals, and sound design to build cinematic content."
-    />
-    <meta
-      name="keywords"
-      content="Anes, video editor, motion designer, portfolio, content creator, storytelling, post-production"
-    />
-    <meta name="author" content="Anes" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#86b4d8" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f1b2a" />
-    <link rel="canonical" href="https://itsvnd.site/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://itsvnd.site/" />
-    <meta property="og:site_name" content="Anes Portfolio" />
-    <meta
-      property="og:title"
-      content="Anes Portfolio – Video Editor &amp; Motion Designer"
-    />
-    <meta
-      property="og:description"
-      content="Discover the work of Anes, a video editor and motion designer who crafts intentional, story-driven visuals for brands and creators."
-    />
-    <meta property="og:image" content="https://itsvnd.site/assets/og-preview.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:alt" content="Anes portfolio highlight collage" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:locale:alternate" content="ar_AR" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Anes Portfolio – Video Editor &amp; Motion Designer" />
-    <meta
-      name="twitter:description"
-      content="Cinematic video editing, motion design, and content creation by Anes. Explore selected projects and get in touch."
-    />
-    <meta name="twitter:image" content="https://itsvnd.site/assets/og-preview.png" />
-    <meta name="twitter:image:alt" content="Anes portfolio reel still" />
-    <title>Anes Portfolio</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="7362021.png" />
-    <link rel="icon" type="image/png" sizes="48x48" href="7362021.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="7362021.png" />
-    <link rel="apple-touch-icon" href="7362021.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Person",
-            "@id": "https://itsvnd.site/#anes",
-            "name": "Anes",
-            "url": "https://itsvnd.site/",
-            "image": "https://itsvnd.site/7362021.png",
-            "jobTitle": [
-              "Video Editor",
-              "Motion Designer"
-            ],
-            "description": "Portfolio of Anes, a video editor and motion designer blending storytelling, sharp visuals, and sound design to build cinematic content.",
-            "sameAs": [
-              "https://www.instagram.com/vnd8d/?hl=en"
-            ],
-            "knowsLanguage": [
-              "en",
-              "ar"
-            ]
-          },
-          {
-            "@type": "WebSite",
-            "@id": "https://itsvnd.site/#website",
-            "url": "https://itsvnd.site/",
-            "name": "Anes Portfolio",
-            "description": "Discover the work of Anes, a video editor and motion designer who crafts intentional, story-driven visuals for brands and creators.",
-            "publisher": {
-              "@id": "https://itsvnd.site/#anes"
-            },
-            "inLanguage": [
-              "en",
-              "ar"
-            ]
-          }
-        ]
-      }
-    </script>
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container nav-container">
-        <a class="brand" href="#home" aria-label="Anes home">
-          <img src="7362021.png" alt="Anes logo" />
-          <span data-translate="brand-name">Anes</span>
-        </a>
-        <nav aria-label="Main navigation">
-          <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
-            <span class="hamburger"></span>
-            <span class="hamburger"></span>
-            <span class="hamburger"></span>
-          </button>
-          <div class="nav-backdrop" id="nav-backdrop"></div>
-          <div class="nav-menu">
-            <a href="#home" data-translate="nav-home">Home</a>
-            <a href="#about" data-translate="nav-about">About Me</a>
-            <a href="#work" data-translate="nav-work">Video Projects</a>
-            <a href="#contact" data-translate="nav-contact">Contact Me</a>
-            <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
-              <span class="lang-toggle-icon">
-                <img class="en-icon" src="English_language.svg" alt="English language" />
-                <img class="ar-icon" src="Flag_of_the_Arab_League.svg" alt="Arabic language" />
-              </span>
-            </button>
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-              <span class="theme-toggle-icon">
-                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="5"/>
-                  <line x1="12" y1="1" x2="12" y2="3"/>
-                  <line x1="12" y1="21" x2="12" y2="23"/>
-                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                  <line x1="1" y1="12" x2="3" y2="12"/>
-                  <line x1="21" y1="12" x2="23" y2="12"/>
-                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                </svg>
-                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-              </span>
-            </button>
-          </div>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anes | Cinematic Video Editor & Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* iOS 26 Design System Tokens */
+            --bg-dark: #000000;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-bg-hover: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border-hover: rgba(255, 255, 255, 0.2);
+            --glass-glow: rgba(255, 255, 255, 0.1);
+            
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            
+            --spring-easing: cubic-bezier(0.175, 0.885, 0.32, 1.15);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Language Toggle Styles */
+        html[lang="ar"] * { font-family: 'Cairo', sans-serif !important; letter-spacing: normal !important; }
+        html[lang="ar"] .lang-en { display: none !important; }
+        html[lang="en"] .lang-ar { display: none !important; }
+        
+        html[lang="ar"] .logo { letter-spacing: 0 !important; }
+        html[lang="ar"] .hero-main h1 { letter-spacing: 0 !important; line-height: 1.3; }
+        
+        /* Adjust layout for RTL */
+        html[lang="ar"] .nav-links { padding-right: 0; }
+        html[lang="ar"] .play-btn svg { margin-left: 0; margin-right: 4px; transform: scaleX(-1); }
+
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-dark); color: var(--text-primary); overflow-x: hidden; overscroll-behavior: none; }
+
+        .ambient-bg {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            z-index: -1;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 50% 40%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 30% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
+            filter: blur(60px);
+            animation: breathe 15s infinite alternate ease-in-out;
+        }
+
+        @keyframes breathe {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.05) translate(-2%, 2%); }
+        }
+
+        .ios-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s var(--spring-easing);
+        }
+
+        .ios-glass:hover {
+            background: var(--glass-bg-hover);
+            border-color: var(--glass-border-hover);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 255, 255, 0.05);
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        .pill { border-radius: 100px; }
+        
+        .text-gradient { background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .text-gradient-accent { background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .nav-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1000px;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            border-radius: 100px;
+            background: rgba(15, 15, 20, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .logo { font-size: 1.25rem; font-weight: 800; letter-spacing: 2px; text-decoration: none; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .btn-primary {
+            padding: 10px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-primary:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
+
+        .nav-actions { display: flex; gap: 10px; align-items: center; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 120px 24px 60px; }
+        .section-title { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 3rem; letter-spacing: -1px; }
+
+        .hero-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 80px; }
+        @media(min-width: 900px) { .hero-grid { grid-template-columns: 2fr 1fr; } }
+
+        .hero-main { padding: 60px 40px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+        .hero-main h1 { font-size: clamp(2.5rem, 4vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -2px; }
+        .hero-main p { font-size: 1.1rem; color: var(--text-secondary); max-width: 90%; margin-bottom: 2rem; line-height: 1.6; }
+
+        .about-widget { padding: 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .avatar-container { width: 120px; height: 120px; border-radius: 50%; padding: 4px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); margin-bottom: 20px; }
+        .avatar { width: 100%; height: 100%; border-radius: 50%; background-image: url('https://images.unsplash.com/photo-1618085222100-8b9a1288bdf2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'); background-size: cover; background-position: center; border: 4px solid var(--bg-dark); }
+
+        .tools-section { margin-bottom: 80px; }
+        .tools-dock { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 30px; }
+        .tool-icon { width: 70px; height: 70px; border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; position: relative; cursor: default; }
+        .tool-icon span { font-size: 0.6rem; font-weight: 500; margin-top: 4px; opacity: 0.7; }
+        .pr { background: linear-gradient(135deg, #300059 0%, #Ea77ff 100%); border: 1px solid #Ea77ff;}
+        .ae { background: linear-gradient(135deg, #00005b 0%, #9999ff 100%); border: 1px solid #9999ff;}
+        .ps { background: linear-gradient(135deg, #001e36 0%, #31a8ff 100%); border: 1px solid #31a8ff;}
+        .ai { background: linear-gradient(135deg, #330000 0%, #ff9a00 100%); border: 1px solid #ff9a00;}
+        .dv { background: linear-gradient(135deg, #1a1a1a 0%, #ff4b4b 50%, #feca57 100%); border: 1px solid #ff4b4b;}
+
+        .works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 80px; }
+        .work-card { padding: 16px; cursor: pointer; position: relative; }
+        .thumbnail-container { width: 100%; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; position: relative; margin-bottom: 16px; }
+        .thumbnail { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--spring-easing); }
+        
+        .play-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: all 0.4s ease; }
+        .play-btn { width: 60px; height: 60px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.5); transform: scale(0.8); transition: transform 0.4s var(--spring-easing); }
+        .play-btn svg { width: 24px; height: 24px; fill: white; margin-left: 4px; }
+        
+        .work-card:hover .thumbnail { transform: scale(1.05); }
+        .work-card:hover .play-overlay { opacity: 1; }
+        .work-card:hover .play-btn { transform: scale(1); }
+        .work-info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+        .work-info p { font-size: 0.9rem; color: var(--text-secondary); }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-bottom: 80px; }
+        .service-card { padding: 32px 24px; text-align: center; }
+        .service-icon { font-size: 2.5rem; margin-bottom: 16px; display: inline-block; }
+        .service-card h3 { font-size: 1.2rem; margin-bottom: 12px; }
+        .service-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
+
+        footer { border-top: 1px solid rgba(255,255,255,0.05); padding: 60px 24px; text-align: center; background: rgba(0,0,0,0.3); backdrop-filter: blur(20px); }
+        .social-links { display: flex; justify-content: center; gap: 16px; margin: 32px 0; flex-wrap: wrap; }
+        .social-btn { display: flex; align-items: center; gap: 8px; padding: 12px 24px; color: white; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all 0.3s var(--spring-easing); }
+        .social-btn:hover { transform: translateY(-4px) scale(1.05); }
+
+        .btn-instagram { background: linear-gradient(45deg, rgba(245, 133, 41, 0.2) 0%, rgba(221, 42, 123, 0.2) 50%, rgba(129, 52, 175, 0.2) 100%); border-color: rgba(221, 42, 123, 0.3); }
+        .btn-instagram:hover { background: linear-gradient(45deg, rgba(245, 133, 41, 0.4) 0%, rgba(221, 42, 123, 0.4) 50%, rgba(129, 52, 175, 0.4) 100%); border-color: rgba(221, 42, 123, 0.6); box-shadow: 0 10px 20px rgba(221, 42, 123, 0.2); }
+        .btn-youtube { background: rgba(255, 0, 0, 0.15); border-color: rgba(255, 0, 0, 0.3); }
+        .btn-youtube:hover { background: rgba(255, 0, 0, 0.3); border-color: rgba(255, 0, 0, 0.6); box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2); }
+        .btn-whatsapp { background: rgba(37, 211, 102, 0.15); border-color: rgba(37, 211, 102, 0.3); }
+        .btn-whatsapp:hover { background: rgba(37, 211, 102, 0.3); border-color: rgba(37, 211, 102, 0.6); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); }
+
+        .ai-chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 9000; display: flex; flex-direction: column; align-items: flex-end; }
+        html[lang="ar"] .ai-chat-widget { right: auto; left: 30px; align-items: flex-start; }
+        
+        .ai-fab { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s var(--spring-easing); border: 2px solid rgba(255,255,255,0.2); }
+        .ai-fab:hover { transform: scale(1.1); box-shadow: 0 15px 30px rgba(139, 92, 246, 0.5); }
+        .ai-fab svg { width: 30px; height: 30px; fill: white; }
+        
+        .ai-chat-window { width: 350px; height: 500px; max-height: 70vh; background: rgba(15, 15, 20, 0.85); backdrop-filter: blur(30px); border: 1px solid var(--glass-border); border-radius: 24px; margin-bottom: 20px; display: flex; flex-direction: column; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(20px) scale(0.95); transition: all 0.4s var(--spring-easing); transform-origin: bottom right; }
+        html[lang="ar"] .ai-chat-window { transform-origin: bottom left; }
+        .ai-chat-window.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        
+        .ai-chat-header { padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.02); }
+        .ai-chat-header h3 { font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .ai-chat-header h3 span { width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #10b981; }
+        .close-chat { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.2rem; }
+        
+        .ai-chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; scroll-behavior: smooth; }
+        .chat-bubble { max-width: 85%; padding: 12px 16px; border-radius: 18px; font-size: 0.9rem; line-height: 1.5; animation: popIn 0.3s var(--spring-easing); }
+        @keyframes popIn { from { opacity: 0; transform: translateY(10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .chat-ai { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-user { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); align-self: flex-end; border-bottom-right-radius: 4px; }
+        html[lang="ar"] .chat-ai { border-bottom-left-radius: 18px; border-bottom-right-radius: 4px; }
+        html[lang="ar"] .chat-user { border-bottom-right-radius: 18px; border-bottom-left-radius: 4px; }
+        
+        .ai-chat-input-area { padding: 16px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 12px; background: rgba(0,0,0,0.2); }
+        .ai-chat-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 10px 16px; color: white; outline: none; font-size: 0.9rem; transition: all 0.3s ease; }
+        .ai-chat-input:focus { background: rgba(255,255,255,0.08); border-color: var(--accent-blue); }
+        .ai-send-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); border: none; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; }
+        .ai-send-btn:hover { background: var(--accent-blue); }
+        html[lang="ar"] .ai-send-btn svg { transform: scaleX(-1); }
+
+        .typing-indicator { display: flex; gap: 4px; padding: 8px 12px; background: rgba(255,255,255,0.05); border-radius: 12px; align-self: flex-start; width: fit-content; display: none; }
+        .typing-indicator span { width: 6px; height: 6px; background: var(--text-secondary); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+        @media(max-width: 768px) {
+            .nav-links { display: none; }
+            .close-btn { top: 10px; right: 10px; z-index: 10; background: rgba(0,0,0,0.5); }
+            html[lang="ar"] .close-btn { right: auto; left: 10px; }
+            .ai-chat-window { width: calc(100vw - 40px); bottom: 100px; right: 20px; position: fixed; }
+            html[lang="ar"] .ai-chat-window { right: auto; left: 20px; }
+            .ai-fab { bottom: 20px; right: 20px; }
+            html[lang="ar"] .ai-fab { right: auto; left: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-bg"></div>
+
+    <div class="nav-container">
+        <nav>
+            <a href="#" class="logo text-gradient">ANES<span style="color: var(--accent-blue)">.</span></a>
+            <ul class="nav-links">
+                <li><a href="#about"><span class="lang-en">About</span><span class="lang-ar">عني</span></a></li>
+                <li><a href="#works"><span class="lang-en">Works</span><span class="lang-ar">أعمالي</span></a></li>
+                <li><a href="#services"><span class="lang-en">Services</span><span class="lang-ar">خدماتي</span></a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#contact" class="btn-primary"><span class="lang-en">Contact</span><span class="lang-ar">تواصل معي</span></a>
+                <button id="langToggle" class="ios-glass pill" style="background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; cursor: pointer; font-weight: 600;">AR</button>
+            </div>
         </nav>
-      </div>
-    </header>
+    </div>
 
-    <main>
-      <section id="home" class="hero" aria-labelledby="hero-title">
-        <div class="container hero-shell">
-          <div class="hero-grid">
-            <div class="hero-intro">
-              <span class="hero-badge" data-translate="hero-badge">Video Editor • Scriptwriter • Motion Designer</span>
-              <h1 id="hero-title" data-translate="hero-title">Welcome, I'm Anes</h1>
-              <p class="hero-lead" data-translate="hero-lead">
-                A video editor and scriptwriter who brings stories to life with purposeful editing,
-                animation, and creator-focused narratives.
-              </p>
-              <p class="hero-sub" data-translate="hero-sub">Check out my work 👇</p>
-              <div class="hero-actions">
-                <a class="button button-primary" href="#work" data-translate="hero-cta-primary">View Projects</a>
-                <a class="button button-ghost" href="#contact" data-translate="hero-cta-secondary">Let me cook your videos</a>
-              </div>
-              <ul class="hero-highlights">
-                <li>
-                  <span class="hero-highlight-number">120+</span>
-                  <span class="hero-highlight-label" data-translate="hero-highlight-1">Videos delivered</span>
-                </li>
-                <li>
-                  <span class="hero-highlight-number">04</span>
-                  <span class="hero-highlight-label" data-translate="hero-highlight-2">TOOLS </span>
-                </li>
-                <li>
-                  <span class="hero-highlight-number">48h</span>
-                  <span class="hero-highlight-label" data-translate="hero-highlight-3">Avg turnaround for shorts</span>
-                </li>
-              </ul>
+    <main class="container">
+        
+        <section id="about" class="hero-grid">
+            <div class="ios-glass hero-main">
+                <div class="ios-glass pill" style="padding: 6px 16px; font-size: 0.8rem; margin-bottom: 20px; border-color: rgba(59, 130, 246, 0.4); color: #93c5fd;">
+                    ✨ <span class="lang-en">Available for new projects</span><span class="lang-ar">متاح للعمل على مشاريع جديدة</span>
+                </div>
+                <h1>
+                    <span class="lang-en">Editing videos that <br><span class="text-gradient-accent">Stand Out.</span></span>
+                    <span class="lang-ar">أصنع لك <span class="text-gradient-accent">فيديوهات</span><br> تلفت الانتباه.</span>
+                </h1>
+                <p>
+                    <span class="lang-en">Welcome! I help you edit your videos with high quality. I focus on the details to deliver engaging content that hooks your viewers from the first second.</span>
+                    <span class="lang-ar">أهلاً بك. أساعدك في مونتاج فيديوهاتك بأعلى جودة، وأهتم بالتفاصيل لتقديم محتوى ممتع يشد المشاهد من اللحظة الأولى.</span>
+                </p>
+                <a href="#works" class="ios-glass pill btn-primary" style="background: white; color: black; border: none; padding: 14px 32px;">
+                    <span class="lang-en">Explore My Works</span><span class="lang-ar">تصفح أعمالي</span>
+                </a>
             </div>
-            <div class="hero-visual" aria-hidden="true">
-              <div class="hero-orbit">
-                <div class="hero-chip">
-                  <img src="assets/premiere.svg" alt="" />
-                </div>
-                <div class="hero-chip">
-                  <img src="assets/after-effects.svg" alt="" />
-                </div>
-                <div class="hero-chip">
-                  <img src="assets/photoshop.svg" alt="" />
-                </div>
-                <div class="hero-chip">
-                  <img src="assets/DaVinci_Resolve_17_logo.svg" alt="" />
-                </div>
-              </div>
-              <div class="hero-card hero-card-primary">
-                <span class="hero-card-label" data-translate="hero-card-title">Narrative-led editing &amp; scripts</span>
-                <span class="hero-card-note" data-translate="hero-card-note">From script draft to final delivery</span>
-              </div>
-              <div class="hero-card hero-card-secondary">
-                <span class="hero-card-metric">2:1</span>
-                <span class="hero-card-caption" data-translate="hero-card-subtitle">Cinematic aspect focus</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="scroll-prompt">
-          <span class="scroll-prompt-dot"></span>
-          <span class="scroll-prompt-label" data-translate="scroll-prompt-label">Scroll to explore</span>
-        </div>
-      </section>
 
-      <section id="about" class="about" aria-labelledby="about-title">
-        <div class="container about-shell">
-          <div class="about-intro">
-            <span class="section-tag" data-translate="about-tag">Profile</span>
-            <h2 id="about-title" data-translate="about-title">About Me</h2>
-            <p class="about-lead" data-translate="about-para-1">
-              I'm a video editor, scriptwriter, and motion designer driven by storytelling. I blend
-              sharp visuals, purposeful pacing, and sound design to transform ideas into cohesive visual narratives.
-            </p>
-            <p data-translate="about-para-2">
-              With experience spanning branded content, social clips, creator scripting, and animation, I collaborate with clients to deliver work that feels intentional, refined, and ready to captivate audiences.
-            </p>
-            <div class="about-points">
-              <div class="about-point">
-                <h3 data-translate="about-point-1-title">Story-first approach</h3>
-                <p data-translate="about-point-1-copy">Every edit is shaped around the core narrative so each beat lands with purpose.</p>
-              </div>
-              <div class="about-point">
-                <h3 data-translate="about-point-2-title">Sound &amp; motion synergy</h3>
-                <p data-translate="about-point-2-copy">Sound design, color, and motion graphics move in sync to keep audiences immersed.</p>
-              </div>
-              <div class="about-point">
-                <h3 data-translate="about-point-3-title">Collaborative workflow</h3>
-                <p data-translate="about-point-3-copy">Transparent milestones, clear feedback loops, and fast turnarounds keep projects flowing.</p>
-              </div>
+            <div class="ios-glass about-widget">
+                <h2 style="font-size: 1.5rem; margin-bottom: 8px;">
+                    <span class="lang-en">Hi, I'm <span class="text-gradient">Anes</span></span>
+                    <span class="lang-ar">مرحباً، أنا <span class="text-gradient">أنس</span></span>
+                </h2>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+                    <span class="lang-en">A professional Video Editor, Motion Designer, and Content Creator dedicated to telling your story with cinematic precision.</span>
+                    <span class="lang-ar">محرر فيديو احترافي ومصمم موشن جرافيك، مكرس جهدي لروي قصتك بأعلى دقة سينمائية ممكنة.</span>
+                </p>
             </div>
-          </div>
-          <aside class="about-profile" aria-label="Anes profile snapshot">
-            <div class="about-portrait">
-              <img src="7362021.png" alt="Portrait of Anes" />
-            </div>
-            <div class="toolset" aria-label="Creative toolkit">
-              <span class="toolset-title" data-translate="tools-title">Tools</span>
-              <ul class="toolset-list">
-                <li class="toolset-item">
-                  <img src="assets/premiere.svg" alt="Adobe Premiere Pro" />
-                  <span data-translate="tool-premiere">Premiere Pro</span>
-                </li>
-                <li class="toolset-item">
-                  <img src="assets/after-effects.svg" alt="Adobe After Effects" />
-                  <span data-translate="tool-aftereffects">After Effects</span>
-                </li>
-                <li class="toolset-item">
-                  <img src="assets/photoshop.svg" alt="Adobe Photoshop" />
-                  <span data-translate="tool-photoshop">Photoshop</span>
-                </li>
-                <li class="toolset-item">
-                  <img src="assets/DaVinci_Resolve_17_logo.svg" alt="DaVinci Resolve" />
-                  <span data-translate="tool-davinci">DaVinci Resolve</span>
-                </li>
-              </ul>
-            </div>
-          </aside>
-        </div>
-      </section>
+        </section>
 
-      <section id="work" class="work" aria-labelledby="work-title">
-        <div class="container work-shell">
-          <div class="section-header">
-            <span class="section-tag" data-translate="work-tag">Selected work</span>
-            <h2 id="work-title" data-translate="work-title">Video Projects</h2>
-            <p class="section-lead" data-translate="work-intro">
-              A curated reel of narrative edits, kinetic titles, and branded content crafted for social, broadcast, and experiential activations.
-            </p>
-          </div>
-          <div class="work-grid">
-            <figure class="work-card">
-              <a class="work-thumb" href="https://www.youtube.com/watch?v=EKfXgDrvsfc" target="_blank" rel="noreferrer">
-                <img src="https://i.ytimg.com/vi/EKfXgDrvsfc/maxresdefault.jpg" alt="Thumbnail for YouTuber reaction edit" loading="lazy" />
-                <span class="work-thumb-play" aria-hidden="true">
-                  <svg viewBox="0 0 68 48" role="img" focusable="false">
-                    <path class="yt-bg" d="M66.52 7.64a8 8 0 0 0-5.63-5.66C55.29.8 34 .8 34 .8s-21.29 0-26.89 1.18a8 8 0 0 0-5.63 5.66A84.78 84.78 0 0 0 0 24a84.78 84.78 0 0 0 1.48 16.36 8 8 0 0 0 5.63 5.66C12.71 47.2 34 47.2 34 47.2s21.29 0 26.89-1.18a8 8 0 0 0 5.63-5.66A84.78 84.78 0 0 0 68 24a84.78 84.78 0 0 0-1.48-16.36Z" />
-                    <path class="yt-play" d="m45 24-15-9v18l15-9z" />
-                  </svg>
-                </span>
-                <span class="work-thumb-footer">
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M10 15.5 16 12l-6-3.5v7ZM23 7s-.2-1.6-.8-2.3a2.5 2.5 0 0 0-1.7-1.7C18.8 2.3 12 2.3 12 2.3s-6.8 0-8.6.7a2.5 2.5 0 0 0-1.7 1.7C1.2 5.4 1 7 1 7S.8 8.7.8 10.5v3c0 1.8.2 3.5.2 3.5s.2 1.6.8 2.3a2.8 2.8 0 0 0 1.8 1.7c1.4.4 6.4.7 6.4.7s6.8 0 8.6-.7a2.5 2.5 0 0 0 1.7-1.7c.6-.7.8-2.3.8-2.3s.2-1.7.2-3.5v-3C23.2 8.7 23 7 23 7Z" />
-                  </svg>
-                  <span data-translate="work-watch">Watch on YouTube</span>
-                </span>
-              </a>
-            </figure>
-            <figure class="work-card">
-              <a class="work-thumb" href="https://www.youtube.com/watch?v=os4J7b1wDTQ&t" target="_blank" rel="noreferrer">
-                <img src="https://i.ytimg.com/vi/os4J7b1wDTQ/maxresdefault.jpg" alt="Thumbnail for YouTuber reaction edit" loading="lazy" />
-                <span class="work-thumb-play" aria-hidden="true">
-                  <svg viewBox="0 0 68 48" role="img" focusable="false">
-                    <path class="yt-bg" d="M66.52 7.64a8 8 0 0 0-5.63-5.66C55.29.8 34 .8 34 .8s-21.29 0-26.89 1.18a8 8 0 0 0-5.63 5.66A84.78 84.78 0 0 0 0 24a84.78 84.78 0 0 0 1.48 16.36 8 8 0 0 0 5.63 5.66C12.71 47.2 34 47.2 34 47.2s21.29 0 26.89-1.18a8 8 0 0 0 5.63-5.66A84.78 84.78 0 0 0 68 24a84.78 84.78 0 0 0-1.48-16.36Z" />
-                    <path class="yt-play" d="m45 24-15-9v18l15-9z" />
-                  </svg>
-                </span>
-                <span class="work-thumb-footer">
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M10 15.5 16 12l-6-3.5v7ZM23 7s-.2-1.6-.8-2.3a2.5 2.5 0 0 0-1.7-1.7C18.8 2.3 12 2.3 12 2.3s-6.8 0-8.6.7a2.5 2.5 0 0 0-1.7 1.7C1.2 5.4 1 7 1 7S.8 8.7.8 10.5v3c0 1.8.2 3.5.2 3.5s.2 1.6.8 2.3a2.8 2.8 0 0 0 1.8 1.7c1.4.4 6.4.7 6.4.7s6.8 0 8.6-.7a2.5 2.5 0 0 0 1.7-1.7c.6-.7.8-2.3.8-2.3s.2-1.7.2-3.5v-3C23.2 8.7 23 7 23 7Z" />
-                  </svg>
-                  <span data-translate="work-watch">Watch on YouTube</span>
-                </span>
-              </a>
-            </figure>
-                <span class="work-thumb-footer">
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M10 15.5 16 12l-6-3.5v7ZM23 7s-.2-1.6-.8-2.3a2.5 2.5 0 0 0-1.7-1.7C18.8 2.3 12 2.3 12 2.3s-6.8 0-8.6.7a2.5 2.5 0 0 0-1.7 1.7C1.2 5.4 1 7 1 7S.8 8.7.8 10.5v3c0 1.8.2 3.5.2 3.5s.2 1.6.8 2.3a2.8 2.8 0 0 0 1.8 1.7c1.4.4 6.4.7 6.4.7s6.8 0 8.6-.7a2.5 2.5 0 0 0 1.7-1.7c.6-.7.8-2.3.8-2.3s.2-1.7.2-3.5v-3C23.2 8.7 23 7 23 7Z" />
-                  </svg>
-                  <span data-translate="work-watch">Watch on YouTube</span>
-                </span>
-              </a>
-            </figure>
-            <figure class="work-card">
-              <a class="work-thumb" href="https://www.youtube.com/watch?v=Bq_0sZUpGyM&t" target="_blank" rel="noreferrer">
-                <img src="https://i.ytimg.com/vi/Bq_0sZUpGyM/maxresdefault.jpg" alt="Thumbnail for Launch narrative" loading="lazy" />
-                <span class="work-thumb-play" aria-hidden="true">
-                  <svg viewBox="0 0 68 48" role="img" focusable="false">
-                    <path class="yt-bg" d="M66.52 7.64a8 8 0 0 0-5.63-5.66C55.29.8 34 .8 34 .8s-21.29 0-26.89 1.18a8 8 0 0 0-5.63 5.66A84.78 84.78 0 0 0 0 24a84.78 84.78 0 0 0 1.48 16.36 8 8 0 0 0 5.63 5.66C12.71 47.2 34 47.2 34 47.2s21.29 0 26.89-1.18a8 8 0 0 0 5.63-5.66A84.78 84.78 0 0 0 68 24a84.78 84.78 0 0 0-1.48-16.36Z" />
-                    <path class="yt-play" d="m45 24-15-9v18l15-9z" />
-                  </svg>
-                </span>
-                <span class="work-thumb-footer">
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M10 15.5 16 12l-6-3.5v7ZM23 7s-.2-1.6-.8-2.3a2.5 2.5 0 0 0-1.7-1.7C18.8 2.3 12 2.3 12 2.3s-6.8 0-8.6.7a2.5 2.5 0 0 0-1.7 1.7C1.2 5.4 1 7 1 7S.8 8.7.8 10.5v3c0 1.8.2 3.5.2 3.5s.2 1.6.8 2.3a2.8 2.8 0 0 0 1.8 1.7c1.4.4 6.4.7 6.4.7s6.8 0 8.6-.7a2.5 2.5 0 0 0 1.7-1.7c.6-.7.8-2.3.8-2.3s.2-1.7.2-3.5v-3C23.2 8.7 23 7 23 7Z" />
-                  </svg>
-                  <span data-translate="work-watch">Watch on YouTube</span>
-                </span>
-              </a>
-            </figure>
-                        <figure class="work-card">
-              <a class="work-thumb" href="https://www.youtube.com/watch?v=xP1iEmdN9js" target="_blank" rel="noreferrer">
-                <img src="https://i.ytimg.com/vi/xP1iEmdN9js/maxresdefault.jpg" alt="Thumbnail for Launch narrative" loading="lazy" />
-                <span class="work-thumb-play" aria-hidden="true">
-                  <svg viewBox="0 0 68 48" role="img" focusable="false">
-                    <path class="yt-bg" d="M66.52 7.64a8 8 0 0 0-5.63-5.66C55.29.8 34 .8 34 .8s-21.29 0-26.89 1.18a8 8 0 0 0-5.63 5.66A84.78 84.78 0 0 0 0 24a84.78 84.78 0 0 0 1.48 16.36 8 8 0 0 0 5.63 5.66C12.71 47.2 34 47.2 34 47.2s21.29 0 26.89-1.18a8 8 0 0 0 5.63-5.66A84.78 84.78 0 0 0 68 24a84.78 84.78 0 0 0-1.48-16.36Z" />
-                    <path class="yt-play" d="m45 24-15-9v18l15-9z" />
-                  </svg>
-                </span>
-                <span class="work-thumb-footer">
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M10 15.5 16 12l-6-3.5v7ZM23 7s-.2-1.6-.8-2.3a2.5 2.5 0 0 0-1.7-1.7C18.8 2.3 12 2.3 12 2.3s-6.8 0-8.6.7a2.5 2.5 0 0 0-1.7 1.7C1.2 5.4 1 7 1 7S.8 8.7.8 10.5v3c0 1.8.2 3.5.2 3.5s.2 1.6.8 2.3a2.8 2.8 0 0 0 1.8 1.7c1.4.4 6.4.7 6.4.7s6.8 0 8.6-.7a2.5 2.5 0 0 0 1.7-1.7c.6-.7.8-2.3.8-2.3s.2-1.7.2-3.5v-3C23.2 8.7 23 7 23 7Z" />
-                  </svg>
-                  <span data-translate="work-watch">Watch on YouTube</span>
-                </span>
-              </a>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="contact" aria-labelledby="contact-title">
-        <div class="container contact-shell">
-          <div class="contact-intro">
-            <span class="section-tag" data-translate="contact-tag">Connect</span>
-            <h2 id="contact-title" data-translate="contact-title">Contact Me</h2>
-            <p class="section-lead" data-translate="contact-lead">
-              Happy to work with you.
-            </p>
-          </div>
-          <div class="contact-grid">
-            <a class="contact-card" href="https://www.instagram.com/vnd8d/?hl=en" target="_blank" rel="noreferrer" aria-label="Instagram">
-              <span class="contact-card-icon">
-                <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
-                  <path d="M16 3.5H8A4.5 4.5 0 0 0 3.5 8v8A4.5 4.5 0 0 0 8 20.5h8a4.5 4.5 0 0 0 4.5-4.5V8A4.5 4.5 0 0 0 16 3.5Zm2.8 12.3a2.8 2.8 0 0 1-2.8 2.8H8a2.8 2.8 0 0 1-2.8-2.8V8A2.8 2.8 0 0 1 8 5.2h8a2.8 2.8 0 0 1 2.8 2.8Z" />
-                  <path d="M12 7.1a4.9 4.9 0 1 0 0 9.8 4.9 4.9 0 0 0 0-9.8Zm0 7.9a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                  <circle cx="17.6" cy="6.4" r="1.3" />
-                </svg>
-              </span>
-              <span class="contact-card-label" data-translate="contact-instagram">Instagram</span>
-              <span class="contact-card-note">@vnd8d</span>
-            </a>
-            <div class="contact-card">
-              <span class="contact-card-icon">
-                <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
-                  <path d="M20.32 4.37a19.74 19.74 0 0 0-4.98-1.51l-.4.8a17.61 17.61 0 0 0-5.86 0l-.4-.8a19.83 19.83 0 0 0-4.98 1.51c-2.36 3.42-3.35 7.6-2.98 11.75a20.16 20.16 0 0 0 6.02 3.07l.48-.99a12.66 12.66 0 0 1-1.95-.94l.26-.2a9.78 9.78 0 0 0 9.72 0l.26.2c-.62.38-1.28.7-1.96.94l.49.99a20.15 20.15 0 0 0 6.01-3.07c.51-5.33-.9-9.45-2.99-11.75ZM9.67 13.27c-.76 0-1.38-.7-1.38-1.56s.62-1.56 1.38-1.56S11.05 10.85 11.05 11.7 10.43 13.27 9.67 13.27Zm4.66 0c-.76 0-1.38-.7-1.38-1.56s.62-1.56 1.38-1.56 1.38.7 1.38 1.56-.62 1.56-1.38 1.56Z" />
-                </svg>
-              </span>
-              <span class="contact-card-label" data-translate="contact-discord">Discord</span>
-              <span class="contact-card-note"><code>vnd8</code></span>
+        <section class="tools-section">
+            <h2 class="section-title" style="font-size: 1.5rem; margin-bottom: 1.5rem; text-align: start;">
+                <span class="lang-en">Tools I Use</span><span class="lang-ar">أدوات أستخدمها</span>
+            </h2>
+            <div class="ios-glass tools-dock">
+                <div class="tool-icon pr">Pr<span>Premiere</span></div>
+                <div class="tool-icon ae">Ae<span>After Effects</span></div>
+                <div class="tool-icon ps">Ps<span>Photoshop</span></div>
+                <div class="tool-icon ai">Ai<span>Illustrator</span></div>
+                <div class="tool-icon dv">Da<span>DaVinci</span></div>
             </div>
-            <a class="contact-card" href="https://wa.me/213555952379" target="_blank" rel="noreferrer" aria-label="WhatsApp">
-              <span class="contact-card-icon">
-                <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
-                  <path d="M20.52 3.48A11.9 11.9 0 0 0 4.41 18.8L3 22.75l4.07-1.07A11.87 11.87 0 0 0 12 24a11.9 11.9 0 0 0 8.52-20.52Zm-3.1 13c-.25.7-1.22 1.3-2 1.48-.5.11-1.18.21-3.45-.73-2.89-1.23-4.78-4.06-4.93-4.26-.16-.2-1.18-1.57-1.18-2.99 0-1.42.75-2.12 1.02-2.42.25-.27.66-.39 1.06-.39h.15c.3 0 .7-.1 1.08.83l.37.88c.18.41.28.9.1 1.17-.17.28-.27.43-.5.68-.16.2-.34.44-.14.85.2.42.9 1.57 1.93 2.55 1.32 1.23 2.4 1.62 2.82 1.8.43.18.68.15.92-.09.28-.3.64-.78.98-1.26.25-.34.56-.39.9-.27.34.12 2.13 1 2.5 1.18.37.19.62.27.71.42.1.14.1.82-.15 1.52Z" />
-                </svg>
-              </span>
-              <span class="contact-card-label" data-translate="contact-whatsapp">WhatsApp</span>
-              <span class="contact-card-note">+213 555 952 379</span>
-            </a>
-            <a class="contact-card" href="mailto:chattivon@gmail.com">
-              <span class="contact-card-icon">
-                <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
-                  <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v.01L12 13l8-6.99V6H4Zm16 12V9.24l-7.38 5.73a1 1 0 0 1-1.24 0L4 9.24V18h16Z" />
-                </svg>
-              </span>
-              <span class="contact-card-label" data-translate="contact-email">Email</span>
-              <span class="contact-card-note">chattivon@gmail.com</span>
-            </a>
-          </div>
-        </div>
-      </section>
+        </section>
+
+        <section id="works">
+            <h2 class="section-title">
+                <span class="lang-en">Featured <span class="text-gradient-accent">Works</span></span>
+                <span class="lang-ar">أبرز <span class="text-gradient-accent">أعمالي</span></span>
+            </h2>
+            
+            <div class="works-grid">
+                
+                <!-- Video 1: Vlogs -->
+                <div class="ios-glass work-card" data-video="Bq_0sZUpGyM">
+                    <div class="thumbnail-container">
+                        <img src="https://img.youtube.com/vi/Bq_0sZUpGyM/hqdefault.jpg" alt="Vlogs" class="thumbnail">
+                        <div class="play-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                    </div>
+                    <div class="work-info">
+                        <h3><span class="lang-en">Vlogs & Lifestyle</span><span class="lang-ar">فلوقات ولايف ستايل</span></h3>
+                        <p><span class="lang-en">Dynamic Editing & Color Grading</span><span class="lang-ar">مونتاج ديناميكي وتلوين</span></p>
+                    </div>
+                </div>
+
+                <!-- Video 2: Gaming -->
+                <div class="ios-glass work-card" data-video="rgNccYqZ3Kg">
+                    <div class="thumbnail-container">
+                        <img src="https://img.youtube.com/vi/rgNccYqZ3Kg/hqdefault.jpg" alt="Gaming" class="thumbnail">
+                        <div class="play-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                    </div>
+                    <div class="work-info">
+                        <h3><span class="lang-en">Gaming Highlights</span><span class="lang-ar">مقاطع الألعاب (قيمنق)</span></h3>
+                        <p><span class="lang-en">High Pacing & SFX</span><span class="lang-ar">إيقاع سريع وتأثيرات صوتية</span></p>
+                    </div>
+                </div>
+
+                <!-- Video 3: Reaction -->
+                <div class="ios-glass work-card" data-video="XOO0BsXTfn0">
+                    <div class="thumbnail-container">
+                        <img src="https://img.youtube.com/vi/XOO0BsXTfn0/hqdefault.jpg" alt="Reaction" class="thumbnail">
+                        <div class="play-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                    </div>
+                    <div class="work-info">
+                        <h3><span class="lang-en">Reaction Videos</span><span class="lang-ar">مقاطع ردود الفعل (رياكشن)</span></h3>
+                        <p><span class="lang-en">Engaging Cuts & Zoom</span><span class="lang-ar">قصات تفاعلية وتركيز مستمر</span></p>
+                    </div>
+                </div>
+
+                <!-- Video 4: Documentary -->
+                <div class="ios-glass work-card" data-video="xP1iEmdN9js">
+                    <div class="thumbnail-container">
+                        <img src="https://img.youtube.com/vi/xP1iEmdN9js/hqdefault.jpg" alt="Documentary" class="thumbnail">
+                        <div class="play-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                    </div>
+                    <div class="work-info">
+                        <h3><span class="lang-en">Documentary</span><span class="lang-ar">أفلام وثائقية</span></h3>
+                        <p><span class="lang-en">Storytelling & Archive Footage</span><span class="lang-ar">سرد قصصي ومواد أرشيفية</span></p>
+                    </div>
+                </div>
+
+                <!-- Video 5: Stories -->
+                <div class="ios-glass work-card" data-video="7ToHXV4vj6c">
+                    <div class="thumbnail-container">
+                        <img src="https://img.youtube.com/vi/7ToHXV4vj6c/hqdefault.jpg" alt="Stories" class="thumbnail">
+                        <div class="play-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                    </div>
+                    <div class="work-info">
+                        <h3><span class="lang-en">Stories</span><span class="lang-ar">قصص</span></h3>
+                        <p><span class="lang-en">Cinematic Flow & Emotion</span><span class="lang-ar">تسلسل سينمائي مؤثر</span></p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="services">
+            <h2 class="section-title">
+                <span class="lang-en">Premium <span class="text-gradient-accent">Services</span></span>
+                <span class="lang-ar">خدمات <span class="text-gradient-accent">مميزة</span></span>
+            </h2>
+            
+            <div class="services-grid">
+                <div class="ios-glass service-card">
+                    <span class="service-icon">🎬</span>
+                    <h3><span class="lang-en">Video Editing</span><span class="lang-ar">تحرير الفيديو (مونتاج)</span></h3>
+                    <p>
+                        <span class="lang-en">High-end editing for documentaries, YouTube videos, and social media platforms.</span>
+                        <span class="lang-ar">مونتاج احترافي وعالي الجودة للوثائقيات، قنوات اليوتيوب، ومنصات التواصل الاجتماعي.</span>
+                    </p>
+                </div>
+                <div class="ios-glass service-card">
+                    <span class="service-icon">✨</span>
+                    <h3><span class="lang-en">Motion Design</span><span class="lang-ar">موشن ديزاين</span></h3>
+                    <p>
+                        <span class="lang-en">Engaging visual effects and complex animations using Adobe After Effects.</span>
+                        <span class="lang-ar">تأثيرات بصرية جذابة وتحريك نصوص ورسومات متقدمة لرفع جودة المحتوى.</span>
+                    </p>
+                </div>
+                <div class="ios-glass service-card">
+                    <span class="service-icon">🎙️</span>
+                    <h3><span class="lang-en">Audio Mixing</span><span class="lang-ar">هندسة صوتية</span></h3>
+                    <p>
+                        <span class="lang-en">Professional sound design, noise reduction, and podcast audio enhancement.</span>
+                        <span class="lang-ar">تصميم صوتي متكامل، تنقية الصوت من الضجيج، وموازنة الصوت للبودكاست.</span>
+                    </p>
+                </div>
+                <div class="ios-glass service-card">
+                    <span class="service-icon">📜</span>
+                    <h3><span class="lang-en">Content Strategy</span><span class="lang-ar">استراتيجية المحتوى</span></h3>
+                    <p>
+                        <span class="lang-en">Scriptwriting, pacing strategy, and historical research for impactful storytelling.</span>
+                        <span class="lang-ar">التخطيط الدقيق للسيناريو، سرعة إيقاع الفيديو، والبحث المتقدم للقصص.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <script>
-      // Language translations
-      const translations = {
-        en: {
-          'brand-name': 'Anes',
-          'nav-home': 'Home',
-          'nav-about': 'About Me',
-          'nav-work': 'Video Projects',
-          'nav-contact': 'Contact Me',
-          'hero-badge': 'Video Editor • Scriptwriter • Motion Designer',
-          'hero-title': 'Welcome, I\'m Anes',
-          'hero-lead': 'A video editor and scriptwriter who brings stories to life with purposeful editing, animation, and creator-focused narratives.',
-          'hero-sub': 'Check out my work 👇',
-          'about-title': 'About Me',
-          'about-para-1': 'I\'m a video editor, scriptwriter, and motion designer driven by storytelling. I blend sharp visuals, purposeful pacing, and sound design to transform ideas into cohesive visual narratives.',
-          'about-para-2': 'With experience spanning branded content, social clips, creator scripting, and animation, I collaborate with clients to deliver work that feels intentional, refined, and ready to captivate audiences.',
-          'hero-cta-primary': 'View Projects',
-          'hero-cta-secondary': 'Let me cook your videos',
-          'hero-highlight-1': 'Videos delivered',
-          'hero-highlight-2': 'Tools',
-          'hero-highlight-3': 'Avg turnaround for shorts',
-          'hero-card-title': 'Narrative-led editing & scripts',
-          'hero-card-note': 'From script draft to final delivery',
-          'hero-card-subtitle': 'Cinematic aspect focus',
-          'scroll-prompt-label': 'Scroll to explore',
-          'tools-title': 'Tools',
-          'tool-premiere': 'Premiere Pro',
-          'tool-aftereffects': 'After Effects',
-          'tool-photoshop': 'Photoshop',
-          'tool-davinci': 'DaVinci Resolve',
-          'about-tag': 'Profile',
-          'about-point-1-title': 'Story-first approach',
-          'about-point-1-copy': 'Every edit is shaped around the core narrative so each beat lands with purpose.',
-          'about-point-2-title': 'Sound & motion synergy',
-          'about-point-2-copy': 'Sound design, color, and motion graphics move in sync to keep audiences immersed.',
-          'about-point-3-title': 'Collaborative workflow',
-          'about-point-3-copy': 'Transparent milestones, clear feedback loops, and fast turnarounds keep projects flowing.',
-          'profile-role': 'Lead video editor & scriptwriter',
-          'profile-location': 'Based in Algeria, collaborating worldwide',
-          'profile-availability': 'Bookings open for Q1 2026',
-          'work-tag': 'Selected work',
-          'work-intro': 'A curated reel of narrative edits, kinetic titles, and branded content crafted for social, broadcast, and experiential activations.',
-          'work-title': 'Video Projects',
-          'thumbnails-title': 'Thumbnails',
-          'contact-title': 'Contact Me',
-          'contact-tag': 'Connect',
-          'contact-lead': 'Happy to work with you.',
-          'contact-instagram': 'Instagram',
-          'contact-discord': 'Discord',
-          'contact-whatsapp': 'WhatsApp',
-          'contact-email': 'Email',
-          'footer-navigate': 'Navigate',
-          'footer-work': 'My Projects',
-          'footer-contact': 'Contact',
-          'footer-description': 'Ready to take your content to the next level?',
-          'footer-copyright': ' Anes. All rights reserved.'
-        },
-        ar: {
-          'brand-name': 'أنس',
-          'nav-home': 'الرئيسية',
-          'nav-about': 'نبذة عني',
-          'nav-work': 'أعمالي',
-          'nav-contact': 'تواصل',
-          'hero-badge': 'مونتاج • كتابة سكربتات • موشن',
-          'hero-title': 'أهلاً، أنا أنس',
-          'hero-lead': 'ممنتج وكاتب محتوى، أروي القصص بمونتاج مدروس وموشن وتحويل الأفكار لرواية موجهة للمبدعين.',
-          'hero-sub': 'شوف شغلي 👇',
-          'about-title': 'نبذة عني',
-          'about-para-1': 'أنا فيديو إيدتور، كاتب سكربتات، ومصمم موشن، أولويتي إحياء المحتوى قبل أي شيء. أشتغل على الصورة، الإيقاع، والهندسة الصوتية كعناصر متكاملة عشان أحوّل أي فكرة لتجربة بصرية متماسكة ومؤثرة.',
-          'about-para-2': 'خبرتي تشمل محتوى العلامات التجارية، مقاطع السوشيال، سكربتات لصناع المحتوى، والأنيميشن. أحرص دايم إن العمل يطلع بهوية واضحة، إحساس عالي، وجاهز يشد انتباه الجمهور من أول لقطة.',
-          'hero-cta-primary': 'شاهد الأعمال',
-          'hero-cta-secondary': 'دعني أطبخ لك محتواك',
-          'hero-highlight-1': 'فيديوهات منجزة',
-          'hero-highlight-2': 'برامج مستعمله ',
-          'hero-highlight-3': 'متوسط تسليم لمقاطع قصيرة',
-          'hero-card-title': 'مونتاج وسكربت بقيمة سردية',
-          'hero-card-note': 'من أول مسودة سكربت إلى التسليم النهائي',
-          'hero-card-subtitle': 'تركيز على الإطار السينمائي',
-          'scroll-prompt-label': 'انزل للاستكشاف',
-          'tools-title': 'البرامج :',
-          'tool-premiere': 'بريمير برو',
-          'tool-aftereffects': 'أفتر إفكتس',
-          'tool-photoshop': 'فوتوشوب',
-          'tool-davinci': 'دافينتشي ريزولف',
-          'about-tag': 'الملف الشخصي',
-          'about-point-1-title': 'القصة أولاً',
-          'about-point-1-copy': 'كل مونتاج مبني حول الرسالة الأساسية عشان كل لقطة توصل إحساسها.',
-          'about-point-2-title': 'تناغم الصوت والحركة',
-          'about-point-2-copy': 'الصوت، الألوان، والموشن يتحركون مع بعض عشان نحافظ على تفاعل المشاهد.',
-          'about-point-3-title': 'تعاون شفاف',
-          'about-point-3-copy': 'مراحل واضحة، ملاحظات مباشرة، وتسليم سريع يحافظ على سلاسة المشروع.',
-          'profile-role': 'مونتير رئيسي وكاتب سكربتات',
-          'profile-location': 'مقره الجزائر ويتعاون عالمياً',
-          'profile-availability': 'الحجوزات مفتوحة للربع الأول 2026',
-          'work-tag': 'أعمال مختارة',
-          'work-intro': 'مختارات من المونتاج السردي، العناوين الحركية، والمحتوى البراندي المخصص للسوشيال والبث والتجارب.',
-          'work-title': 'مشاريع الفيديو',
-          'thumbnails-title': 'الصور المصغرة',
-          'contact-title': 'تواصل معي',
-          'contact-tag': 'تواصل',
-          'contact-lead': 'سعيد بالتعامل معك.',
-          'contact-instagram': 'انستغرام',
-          'contact-discord': 'ديسكورد',
-          'contact-whatsapp': 'واتساب',
-          'contact-email': 'البريد الإلكتروني',
-          'footer-navigate': 'تصفح',
-          'footer-work': 'مشاريع الفيديو',
-          'footer-contact': 'التواصل',
-          'footer-description': 'مستعد تاخذ محتواك لمرحله ثانية ؟',
-          'footer-copyright': '© {year} أنس. جميع الحقوق محفوظة.'
-        }
-      };
-
-      // Mobile menu toggle
-      const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-      const navMenu = document.querySelector('.nav-menu');
-      const navBackdrop = document.getElementById('nav-backdrop');
-      
-      mobileMenuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        mobileMenuToggle.classList.toggle('active');
-        navBackdrop.classList.toggle('active');
-      });
-
-      // Close mobile menu when clicking on a link
-      document.querySelectorAll('.nav-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-          navMenu.classList.remove('active');
-          mobileMenuToggle.classList.remove('active');
-          navBackdrop.classList.remove('active');
-        });
-      });
-
-      // Close mobile menu when clicking backdrop
-      navBackdrop.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        mobileMenuToggle.classList.remove('active');
-        navBackdrop.classList.remove('active');
-      });
-
-      // Close mobile menu when clicking outside
-      document.addEventListener('click', (e) => {
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const navMenu = document.querySelector('.nav-menu');
+    <footer id="contact">
+        <h2 style="font-size: 2rem; margin-bottom: 10px;">
+            <span class="lang-en">Let's Work Together</span>
+            <span class="lang-ar">لنتعاون معاً ونصنع الإبداع</span>
+        </h2>
+        <p style="color: var(--text-secondary); margin-bottom: 20px;">chattivon@gmail.com</p>
         
-        if (navMenu && navMenu.classList.contains('active') && 
-            mobileMenuToggle && 
-            !navMenu.contains(e.target) && 
-            !mobileMenuToggle.contains(e.target)) {
-          navMenu.classList.remove('active');
-          mobileMenuToggle.classList.remove('active');
-        }
-      });
-
-      // Language toggle functionality
-      const langToggle = document.getElementById('lang-toggle');
-      const html = document.documentElement;
-      
-      // Check for saved language preference or default to English
-      const currentLang = localStorage.getItem('language') || 'en';
-      html.setAttribute('data-lang', currentLang);
-      
-      function updateLanguage(lang) {
-        // Update HTML lang attribute and direction
-        html.setAttribute('lang', lang);
-        html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-        
-        // Update all translatable elements
-        document.querySelectorAll('[data-translate]').forEach(element => {
-          const key = element.getAttribute('data-translate');
-          const translation = translations[lang][key];
-          
-          if (translation) {
-            // Handle copyright year replacement
-            if (key === 'footer-copyright') {
-              element.innerHTML = translation.replace('{year}', new Date().getFullYear());
-            } else {
-              element.textContent = translation;
-            }
-          }
-        });
-        
-        // Save preference
-        localStorage.setItem('language', lang);
-      }
-      
-      langToggle.addEventListener('click', () => {
-        const currentLang = html.getAttribute('data-lang');
-        const newLang = currentLang === 'ar' ? 'en' : 'ar';
-        
-        html.setAttribute('data-lang', newLang);
-        updateLanguage(newLang);
-      });
-      
-      // Initialize language on load
-      updateLanguage(currentLang);
-
-      // Theme toggle functionality
-      const themeToggle = document.getElementById('theme-toggle');
-      
-      // Check for saved theme preference or default to dark
-      const currentTheme = localStorage.getItem('theme') || 'dark';
-      html.setAttribute('data-theme', currentTheme);
-      
-      // Track visitor statistics
-      trackVisitor();
-      
-      themeToggle.addEventListener('click', () => {
-        const theme = html.getAttribute('data-theme');
-        const newTheme = theme === 'dark' ? 'light' : 'dark';
-        
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-      });
-
-      const toggles = document.querySelectorAll('.contact-toggle[data-target]');
-      toggles.forEach((toggle) => {
-        toggle.addEventListener('click', () => {
-          const targetId = toggle.dataset.target;
-          const target = document.getElementById(targetId);
-          if (!target) return;
-
-          const willExpand = target.hasAttribute('hidden');
-
-          toggles.forEach((btn) => {
-            const card = document.getElementById(btn.dataset.target);
-            if (card && card !== target) {
-              card.setAttribute('hidden', '');
-              btn.setAttribute('aria-expanded', 'false');
-            }
-          });
-
-          if (willExpand) {
-            target.removeAttribute('hidden');
-          } else {
-            target.setAttribute('hidden', '');
-          }
-          toggle.setAttribute('aria-expanded', willExpand ? 'true' : 'false');
-        });
-      });
-
-      // Scroll animations for footer
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          // Add subtle animation when entering viewport
-          if (entry.isIntersecting) {
-            entry.target.style.transform = 'translateY(-5px)';
-            entry.target.style.opacity = '0.8';
-          } else {
-            // Reset when leaving viewport
-            entry.target.style.transform = 'translateY(0)';
-            entry.target.style.opacity = '1';
-          }
-        });
-      }, observerOptions);
-
-      // Observe footer elements for subtle hover effect
-      const footerElements = document.querySelectorAll('.footer-brand, .footer-links, .footer-contact, .footer-meta');
-      footerElements.forEach(el => {
-        observer.observe(el);
-      });
-
-      // Observe all scroll-animate elements
-      document.querySelectorAll('.scroll-animate').forEach(el => {
-        observer.observe(el);
-      });
-    </script>
-
-    <footer class="site-footer">
-      <div class="container footer-layout">
-        <div class="footer-brand">
-          <img src="7362021.png" alt="Anes logo" />
-          <strong>Anes Studio</strong>
-          <p data-translate="footer-description">
-            Ready to take your content to the next level?
-          </p>
+        <div class="social-links">
+            <a href="https://x.com/vnd8d" target="_blank" class="ios-glass pill social-btn">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                Twitter
+            </a>
+            <a href="https://www.instagram.com/vnd8d/" target="_blank" class="ios-glass pill social-btn btn-instagram">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                Instagram
+            </a>
+            <a href="https://www.youtube.com/@vnd8d" target="_blank" class="ios-glass pill social-btn btn-youtube">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                YouTube
+            </a>
+            <a href="https://wa.me/213555952379" target="_blank" class="ios-glass pill social-btn btn-whatsapp">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.086 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                WhatsApp
+            </a>
         </div>
-        <div class="footer-links">
-          <h3 data-translate="footer-navigate">Navigate</h3>
-          <a href="#home" data-translate="nav-home">Home</a>
-          <a href="#about" data-translate="nav-about">About</a>
-          <a href="#work" data-translate="footer-work">Video Projects</a>
-          <a href="#contact" data-translate="nav-contact">Contact</a>
-        </div>
-        <div class="footer-contact">
-          <h3 data-translate="footer-contact">Contact</h3>
-          <span>Instagram: <a href="https://www.instagram.com/vnd8d/?hl=en" target="_blank" rel="noreferrer">@vnd8d</a></span>
-          <span>Discord: <code>vnd8</code></span>
-          <span>WhatsApp: <a href="https://wa.me/213555952379" target="_blank" rel="noreferrer">+213 555 952 379</a></span>
-          <span>Email: <a href="mailto:chattivon@gmail.com">chattivon@gmail.com</a></span>
-        </div>
-      </div>
-      <div class="footer-meta" data-translate="footer-copyright">© <span id="current-year"></span> Anes. All rights reserved.</div>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.3);">© 2026 Anes Portfolio.</p>
     </footer>
 
+    <!-- AI Chat Widget -->
+    <div class="ai-chat-widget">
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-chat-header">
+                <h3>
+                    <span></span> 
+                    <span class="lang-en">Anes's AI Agent</span><span class="lang-ar">مساعد أنس الذكي</span>
+                </h3>
+                <button class="close-chat" id="closeChatBtn">✕</button>
+            </div>
+            
+            <div class="ai-chat-messages" id="chatMessages">
+                <div class="chat-bubble chat-ai">
+                    <span class="lang-en">Hi there! 👋 I'm Anes's AI assistant. Want to know more about his video editing services?</span>
+                    <span class="lang-ar">مرحباً بك! 👋 أنا المساعد الذكي لأنس. هل تود معرفة المزيد عن خدماته في تحرير الفيديو؟</span>
+                </div>
+                <div class="typing-indicator" id="typingIndicator">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <div class="ai-chat-input-area">
+                <input type="text" id="chatInput" class="ai-chat-input" placeholder="Type a message...">
+                <button class="ai-send-btn" id="sendBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+        </div>
+        
+        <div class="ai-fab" id="chatFab" title="Chat with AI">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.848.5 3.582 1.382 5.086L2 22l4.914-1.382C8.418 21.5 10.152 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.543 0-3-.35-4.286-.967l-2.857.8.8-2.857C4.35 15 4 13.543 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/><circle cx="8" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></svg>
+        </div>
+    </div>
+
     <script>
-      // Track visitor statistics
-      function trackVisitor() {
-        let totalVisits = parseInt(localStorage.getItem('totalVisits') || '0');
-        let uniqueVisitors = JSON.parse(localStorage.getItem('uniqueVisitors') || '[]');
-        let sessionStart = parseInt(localStorage.getItem('sessionStart') || '0');
-        
-        // Increment total visits
-        totalVisits++;
-        localStorage.setItem('totalVisits', totalVisits);
-        
-        // Track unique visitors
-        const visitorId = getVisitorId();
-        if (!uniqueVisitors.includes(visitorId)) {
-          uniqueVisitors.push(visitorId);
-          localStorage.setItem('uniqueVisitors', JSON.stringify(uniqueVisitors));
+        // --- Language Toggle Logic ---
+        const langToggle = document.getElementById('langToggle');
+        const html = document.documentElement;
+        const chatInput = document.getElementById('chatInput');
+
+        langToggle.addEventListener('click', () => {
+            const currentLang = html.getAttribute('lang');
+            if (currentLang === 'en') {
+                html.setAttribute('lang', 'ar');
+                html.setAttribute('dir', 'rtl');
+                langToggle.textContent = 'EN';
+                chatInput.placeholder = 'اكتب رسالتك هنا...';
+            } else {
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                langToggle.textContent = 'AR';
+                chatInput.placeholder = 'Type a message...';
+            }
+        });
+
+        // --- Video Redirect Logic ---
+        const cards = document.querySelectorAll('.work-card');
+
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                const videoId = this.getAttribute('data-video');
+                // فتح الفيديو في نافذة يوتيوب جديدة
+                window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+            });
+        });
+
+        // --- AI Chatbot Logic ---
+        const chatFab = document.getElementById('chatFab');
+        const chatWindow = document.getElementById('aiChatWindow');
+        const closeChatBtn = document.getElementById('closeChatBtn');
+        const sendBtn = document.getElementById('sendBtn');
+        const chatMessages = document.getElementById('chatMessages');
+        const typingIndicator = document.getElementById('typingIndicator');
+
+        chatFab.addEventListener('click', () => chatWindow.classList.add('open'));
+        closeChatBtn.addEventListener('click', () => chatWindow.classList.remove('open'));
+
+        let chatHistory = [];
+
+        function appendMessage(role, text) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('chat-bubble');
+            bubble.classList.add(role === 'user' ? 'chat-user' : 'chat-ai');
+            bubble.textContent = text;
+            chatMessages.insertBefore(bubble, typingIndicator);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
-        
-        // Update session start
-        if (sessionStart === 0) {
-          localStorage.setItem('sessionStart', Date.now());
+
+        async function fetchGeminiResponse(userText) {
+            typingIndicator.style.display = 'flex';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            chatHistory.push({ role: "user", parts: [{ text: userText }] });
+
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            const currentLang = html.getAttribute('lang');
+            const systemPrompt = `You are the AI assistant for Anes, a professional Video Editor. Respond friendly and briefly (1-3 sentences). MUST RESPOND IN ${currentLang === 'ar' ? 'ARABIC' : 'ENGLISH'}.`;
+
+            const payload = {
+                contents: chatHistory,
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates[0].content) {
+                    const aiText = result.candidates[0].content.parts[0].text;
+                    appendMessage('ai', aiText);
+                    chatHistory.push({ role: "model", parts: [{ text: aiText }] });
+                } else {
+                    appendMessage('ai', currentLang === 'ar' ? "عذراً، أواجه مشكلة في الاتصال حالياً." : "I'm having a little trouble connecting right now.");
+                }
+            } catch (error) {
+                appendMessage('ai', currentLang === 'ar' ? "حدث خطأ ما. يرجى التواصل عبر الواتساب!" : "Oops, something went wrong. Please use WhatsApp!");
+            } finally {
+                typingIndicator.style.display = 'none';
+            }
         }
-      }
-      
-      // Generate visitor ID
-      function getVisitorId() {
-        let visitorId = localStorage.getItem('visitorId');
-        if (!visitorId) {
-          visitorId = 'visitor_' + Math.random().toString(36).substr(2, 9);
-          localStorage.setItem('visitorId', visitorId);
-        }
-        return visitorId;
-      }
-      
-      document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        const handleSend = () => {
+            const text = chatInput.value.trim();
+            if (text === '') return;
+            appendMessage('user', text);
+            chatInput.value = '';
+            fetchGeminiResponse(text);
+        };
+
+        sendBtn.addEventListener('click', handleSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSend();
+        });
+
     </script>
-  </body>
+</body>
 </html>
