@@ -59,7 +59,12 @@ export default function AdminDashboard({ currentLang, toggleLang, onBackToPortfo
   const [saveStatus, setSaveStatus] = useState<{ [key: string]: string }>({});
 
   // Active Admin Tab
-  const [activeTab, setActiveTab] = useState<"requests" | "works">("requests");
+  const [activeTab, setActiveTab] = useState<"requests" | "works" | "discord">("requests");
+
+  // Discord Verification State
+  const [discordVerification, setDiscordVerification] = useState("");
+  const [discordSaveStatus, setDiscordSaveStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [isSavingDiscord, setIsSavingDiscord] = useState(false);
 
   // Works State
   const [works, setWorks] = useState<any[]>([]);
@@ -186,6 +191,15 @@ export default function AdminDashboard({ currentLang, toggleLang, onBackToPortfo
         setWorks(worksData);
       }
 
+      // Fetch Discord Verification Content
+      const discordResponse = await fetch("/api/admin/discord-verification", {
+        headers: { Authorization: authHeader },
+      });
+      if (discordResponse.ok) {
+        const discordData = await discordResponse.json();
+        setDiscordVerification(discordData.content || "");
+      }
+
     } catch (err) {
       console.error("Error loading dashboard data:", err);
     } finally {
@@ -195,6 +209,47 @@ export default function AdminDashboard({ currentLang, toggleLang, onBackToPortfo
 
   const getActiveToken = () => {
     return passwordInput || localStorage.getItem("anes_admin_token") || "";
+  };
+
+  // Save Discord Verification Content
+  const handleSaveDiscord = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSavingDiscord(true);
+    setDiscordSaveStatus(null);
+    const token = getActiveToken();
+    const authHeader = `Bearer ${token}`;
+
+    try {
+      const response = await fetch("/api/admin/discord-verification", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authHeader,
+        },
+        body: JSON.stringify({ content: discordVerification }),
+      });
+
+      if (response.ok) {
+        setDiscordSaveStatus({
+          type: "success",
+          text: currentLang === "ar" ? "✅ تم حفظ كود التحقق بنجاح!" : "✅ Verification code saved successfully!",
+        });
+      } else {
+        const data = await response.json();
+        setDiscordSaveStatus({
+          type: "error",
+          text: data.error || (currentLang === "ar" ? "❌ فشل في حفظ كود التحقق" : "❌ Failed to save verification code"),
+        });
+      }
+    } catch (err) {
+      console.error("Error saving discord code:", err);
+      setDiscordSaveStatus({
+        type: "error",
+        text: currentLang === "ar" ? "❌ حدث خطأ في الاتصال بالخادم" : "❌ Server communication error",
+      });
+    } finally {
+      setIsSavingDiscord(false);
+    }
   };
 
   // 4. Update message state / Reply / Private note
@@ -496,6 +551,16 @@ export default function AdminDashboard({ currentLang, toggleLang, onBackToPortfo
               }`}
             >
               {currentLang === "ar" ? "🎬 إدارة مقاطع المعرض" : "🎬 Manage Portfolio Videos"}
+            </button>
+            <button
+              onClick={() => setActiveTab("discord")}
+              className={`pb-2 px-4 font-bold text-sm transition relative ${
+                activeTab === "discord"
+                  ? "text-blue-400 border-b-2 border-blue-500"
+                  : "text-neutral-400 hover:text-white cursor-pointer"
+              }`}
+            >
+              {currentLang === "ar" ? "🛠️ توثيق الديسكورد" : "🛠️ Discord Verification"}
             </button>
           </div>
 
@@ -826,7 +891,7 @@ export default function AdminDashboard({ currentLang, toggleLang, onBackToPortfo
 
               </div>
             </>
-          ) : (
+          ) : activeTab === "works" ? (
             // Works/Videos Management layout Tab
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               
@@ -1030,6 +1095,72 @@ export default function AdminDashboard({ currentLang, toggleLang, onBackToPortfo
                 )}
               </div>
 
+            </div>
+          ) : (
+            // Discord Verification tab
+            <div className="glass-effect rounded-[24px] p-8 border border-white/10 max-w-2xl mx-auto space-y-6 text-start">
+              <div>
+                <h2 className="text-xl font-bold text-white mb-2">
+                  {currentLang === "ar" ? "🛠️ ربط وتوثيق الديسكورد" : "🛠️ Discord Domain Verification"}
+                </h2>
+                <p className="text-xs text-neutral-400 leading-relaxed">
+                  {currentLang === "ar" 
+                    ? "عند تفعيل خيار ربط نطاقك (Domain) في ديسكورد، يطلب منك ديسكورد إنشاء ملف للتوثيق على مسار محدد بمحتوى خاص. انسخ المحتوى والصقه بالأسفل ليقوم الموقع بخدمته تلقائياً."
+                    : "When connecting your domain to Discord, you are asked to create a verification file on your website at a specific path. Paste the verification text here to serve it automatically."}
+                </p>
+              </div>
+
+              <div className="p-4 rounded-xl bg-blue-500/5 border border-blue-500/20 text-xs text-neutral-300 space-y-2">
+                <p className="font-semibold text-blue-400">
+                  {currentLang === "ar" ? "📌 كيف تعمل هذه الميزة؟" : "📌 How does this work?"}
+                </p>
+                <p>
+                  {currentLang === "ar" 
+                    ? "الرابط المطلوب توثيقه في ديسكورد يكون:"
+                    : "The URL Discord will try to verify is:"}
+                  <code className="block mt-1 p-2 bg-black/40 rounded font-mono text-blue-300 select-all">
+                    https://itsvnd.site/.well-known/discord
+                  </code>
+                </p>
+                <p>
+                  {currentLang === "ar" 
+                    ? "بعد كتابة الكود والضغط على 'حفظ'، يمكنك الضغط على 'Verify' في ديسكورد وسيتم التوثيق فوراً!"
+                    : "After saving the code here, you can click 'Verify' in Discord to complete domain validation!"}
+                </p>
+              </div>
+
+              <form onSubmit={handleSaveDiscord} className="space-y-4">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-neutral-400 uppercase tracking-wider block">
+                    {currentLang === "ar" ? "محتوى كود التحقق (Content):" : "Verification Content:"}
+                  </label>
+                  <textarea
+                    value={discordVerification}
+                    onChange={(e) => setDiscordVerification(e.target.value)}
+                    placeholder="e.g. dh=a64e0f45a055c92b35dafe9641c61ed621..."
+                    rows={4}
+                    required
+                    className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500 transition font-mono resize-none"
+                  />
+                  <span className="text-[10px] text-neutral-500 block">
+                    {currentLang === "ar" ? "الصق السطر المكتوب بجانب 'Content' في ديسكورد بالكامل." : "Paste the complete verification string generated by Discord."}
+                  </span>
+                </div>
+
+                {discordSaveStatus && (
+                  <p className={`text-xs font-semibold py-1 ${discordSaveStatus.type === "success" ? "text-green-400" : "text-red-400"}`}>
+                    {discordSaveStatus.text}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isSavingDiscord}
+                  className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-xl shadow-blue-500/10 transition flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  {isSavingDiscord ? (currentLang === "ar" ? "جاري الحفظ..." : "Saving...") : (currentLang === "ar" ? "حفظ وتفعيل كود التوثيق" : "Save & Activate Verification")}
+                </button>
+              </form>
             </div>
           )}
 
