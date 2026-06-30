@@ -12,6 +12,7 @@ const PORT = 3000;
 const DATA_DIR = path.join(process.cwd(), "data");
 const MESSAGES_FILE = path.join(DATA_DIR, "messages.json");
 const WORKS_FILE = path.join(DATA_DIR, "works.json");
+const DISCORD_FILE = path.join(DATA_DIR, "discord_verification.txt");
 
 // Ensure the data directory and messages file exist
 if (!fs.existsSync(DATA_DIR)) {
@@ -427,6 +428,44 @@ app.delete("/api/admin/works/:id", adminAuth, (req, res) => {
 
   writeWorks(filtered);
   res.json({ success: true, message: "Work item deleted successfully" });
+});
+
+// 10. Discord Verification (Public Endpoint)
+app.get("/.well-known/discord", (req, res) => {
+  if (fs.existsSync(DISCORD_FILE)) {
+    const content = fs.readFileSync(DISCORD_FILE, "utf-8");
+    res.setHeader("Content-Type", "text/plain");
+    return res.send(content.trim());
+  }
+  res.status(404).send("Not Found");
+});
+
+app.get("/well-known/discord", (req, res) => {
+  res.redirect("/.well-known/discord");
+});
+
+// 11. Get Discord Verification Content (Admin Only)
+app.get("/api/admin/discord-verification", adminAuth, (req, res) => {
+  let content = "";
+  if (fs.existsSync(DISCORD_FILE)) {
+    content = fs.readFileSync(DISCORD_FILE, "utf-8");
+  }
+  res.json({ content });
+});
+
+// 12. Save Discord Verification Content (Admin Only)
+app.post("/api/admin/discord-verification", adminAuth, (req, res) => {
+  const { content } = req.body;
+  if (content === undefined) {
+    return res.status(400).json({ error: "Content field is required" });
+  }
+  try {
+    fs.writeFileSync(DISCORD_FILE, content.trim(), "utf-8");
+    res.json({ success: true, message: "Discord verification updated successfully" });
+  } catch (err) {
+    console.error("Error saving discord verification:", err);
+    res.status(500).json({ error: "Failed to save verification file" });
+  }
 });
 
 // Vite Middleware for Development / Static serving for Production
