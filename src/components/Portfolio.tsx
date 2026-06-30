@@ -320,8 +320,13 @@ export default function Portfolio({ currentLang, toggleLang, onNavigateToAdmin }
           {/* Anes Bio Card */}
           <div className="glass-effect rounded-[32px] p-8 flex flex-col justify-between items-center text-center relative overflow-hidden">
             <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 p-1 mb-6 relative group shadow-2xl">
-              <div className="w-full h-full rounded-full bg-black flex items-center justify-center overflow-hidden">
-                <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">A</span>
+              <div className="w-full h-full rounded-full bg-black flex items-center justify-center overflow-hidden animate-[pulse_3s_infinite]">
+                <img 
+                  src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&q=80&w=256&h=256" 
+                  alt="Anes Video Editor Avatar" 
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover rounded-full transform hover:scale-110 transition duration-500"
+                />
               </div>
               <div className="absolute inset-0 rounded-full bg-blue-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
