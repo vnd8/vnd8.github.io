@@ -3,8 +3,8 @@ import Portfolio from "./components/Portfolio";
 import AdminDashboard from "./components/AdminDashboard";
 
 export default function App() {
-  // Support both Arabic and English. Default to Arabic (RTL) for best personal touch!
-  const [currentLang, setCurrentLang] = useState<"en" | "ar">("ar");
+  // Support both Arabic and English. Default to English (LTR) first, then user can toggle to Arabic.
+  const [currentLang, setCurrentLang] = useState<"en" | "ar">("en");
   const [currentView, setCurrentView] = useState<"portfolio" | "admin">("portfolio");
 
   // Route listening
