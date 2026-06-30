@@ -11,6 +11,7 @@ const app = express();
 const PORT = 3000;
 const DATA_DIR = path.join(process.cwd(), "data");
 const MESSAGES_FILE = path.join(DATA_DIR, "messages.json");
+const WORKS_FILE = path.join(DATA_DIR, "works.json");
 
 // Ensure the data directory and messages file exist
 if (!fs.existsSync(DATA_DIR)) {
@@ -18,6 +19,56 @@ if (!fs.existsSync(DATA_DIR)) {
 }
 if (!fs.existsSync(MESSAGES_FILE)) {
   fs.writeFileSync(MESSAGES_FILE, JSON.stringify([], null, 2));
+}
+if (!fs.existsSync(WORKS_FILE)) {
+  const defaultWorks = [
+    {
+      id: "w1",
+      youtubeId: "Bq_0sZUpGyM",
+      titleEn: "Vlogs & Lifestyle",
+      titleAr: "فلوقات ولايف ستايل",
+      descEn: "Dynamic Editing & Color Grading",
+      descAr: "مونتاج ديناميكي وتنسيق ألوان سينمائي",
+      category: "vlogs"
+    },
+    {
+      id: "w2",
+      youtubeId: "rgNccYqZ3Kg",
+      titleEn: "Gaming Highlights",
+      titleAr: "مقاطع الألعاب (قيمنق)",
+      descEn: "High Pacing & Engaging SFX",
+      descAr: "إيقاع سريع مع مؤثرات صوتية تفاعلية",
+      category: "gaming"
+    },
+    {
+      id: "w3",
+      youtubeId: "XOO0BsXTfn0",
+      titleEn: "Reaction Videos",
+      titleAr: "مقاطع ردود الفعل (رياكشن)",
+      descEn: "Engaging Cuts & Zoom Effects",
+      descAr: "قصات مشوقة وتأثيرات زووم مستمرة",
+      category: "reaction"
+    },
+    {
+      id: "w4",
+      youtubeId: "xP1iEmdN9js",
+      titleEn: "Documentary Video",
+      titleAr: "أفلام وثائقية وثقافية",
+      descEn: "Storytelling & Historical Archives",
+      descAr: "سرد قصصي وبحث وثائقي وأرشيف متكامل",
+      category: "documentary"
+    },
+    {
+      id: "w5",
+      youtubeId: "7ToHXV4vj6c",
+      titleEn: "Cinematic Stories",
+      titleAr: "قصص وتجارب سينمائية",
+      descEn: "Emotional Narrative & Visual Flow",
+      descAr: "تسلسل بصري غامر وتدفق عاطفي عميق",
+      category: "stories"
+    }
+  ];
+  fs.writeFileSync(WORKS_FILE, JSON.stringify(defaultWorks, null, 2));
 }
 
 // Middleware
@@ -52,6 +103,25 @@ function writeMessages(messages: Message[]) {
     fs.writeFileSync(MESSAGES_FILE, JSON.stringify(messages, null, 2));
   } catch (error) {
     console.error("Error writing messages file:", error);
+  }
+}
+
+// Helpers for Reading/Writing Works
+function readWorks(): any[] {
+  try {
+    const data = fs.readFileSync(WORKS_FILE, "utf-8");
+    return JSON.parse(data);
+  } catch (error) {
+    console.error("Error reading works file:", error);
+    return [];
+  }
+}
+
+function writeWorks(works: any[]) {
+  try {
+    fs.writeFileSync(WORKS_FILE, JSON.stringify(works, null, 2));
+  } catch (error) {
+    console.error("Error writing works file:", error);
   }
 }
 
@@ -271,6 +341,52 @@ app.delete("/api/admin/messages/:id", adminAuth, (req, res) => {
 
   writeMessages(filtered);
   res.json({ success: true, message: "Message deleted successfully" });
+});
+
+// 7. Get All Works (Public)
+app.get("/api/works", (req, res) => {
+  const works = readWorks();
+  res.json(works);
+});
+
+// 8. Add a Work (Admin Only)
+app.post("/api/admin/works", adminAuth, (req, res) => {
+  const { youtubeId, titleEn, titleAr, descEn, descAr, category } = req.body;
+
+  if (!youtubeId || !titleEn || !titleAr || !descEn || !descAr || !category) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  const newWork = {
+    id: "work_" + Math.random().toString(36).substr(2, 9),
+    youtubeId: youtubeId.trim(),
+    titleEn: titleEn.trim(),
+    titleAr: titleAr.trim(),
+    descEn: descEn.trim(),
+    descAr: descAr.trim(),
+    category: category.trim()
+  };
+
+  const works = readWorks();
+  works.push(newWork);
+  writeWorks(works);
+
+  res.status(201).json({ success: true, data: newWork });
+});
+
+// 9. Delete a Work (Admin Only)
+app.delete("/api/admin/works/:id", adminAuth, (req, res) => {
+  const { id } = req.params;
+
+  const works = readWorks();
+  const filtered = works.filter((w) => w.id !== id);
+
+  if (works.length === filtered.length) {
+    return res.status(404).json({ error: "Work item not found" });
+  }
+
+  writeWorks(filtered);
+  res.json({ success: true, message: "Work item deleted successfully" });
 });
 
 // Vite Middleware for Development / Static serving for Production
