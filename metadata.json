@@ -1,0 +1,6 @@
+{
+  "name": "Anes Portfolio",
+  "description": "Anes Cinematic Video Editor Portfolio with Admin Management Panel and Email Notifications",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
