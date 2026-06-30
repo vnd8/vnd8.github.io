@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Play, 
   Mail, 
@@ -42,7 +42,7 @@ export default function Portfolio({ currentLang, toggleLang, onNavigateToAdmin }
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   // Video Works Data
-  const works: WorkItem[] = [
+  const defaultWorks: WorkItem[] = [
     {
       id: "w1",
       youtubeId: "Bq_0sZUpGyM",
@@ -89,6 +89,21 @@ export default function Portfolio({ currentLang, toggleLang, onNavigateToAdmin }
       category: "stories"
     }
   ];
+
+  const [works, setWorks] = useState<WorkItem[]>(defaultWorks);
+
+  useEffect(() => {
+    fetch("/api/works")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setWorks(data);
+        }
+      })
+      .catch(err => {
+        console.error("Error fetching works from server:", err);
+      });
+  }, []);
 
   // Filtered Works
   const filteredWorks = activeCategory === "all" 

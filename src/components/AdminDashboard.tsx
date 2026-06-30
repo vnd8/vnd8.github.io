@@ -58,6 +58,22 @@ export default function AdminDashboard({ currentLang, toggleLang, onBackToPortfo
   const [replyTextMap, setReplyTextMap] = useState<{ [key: string]: string }>({});
   const [saveStatus, setSaveStatus] = useState<{ [key: string]: string }>({});
 
+  // Active Admin Tab
+  const [activeTab, setActiveTab] = useState<"requests" | "works">("requests");
+
+  // Works State
+  const [works, setWorks] = useState<any[]>([]);
+
+  // New Work Form State
+  const [newYoutubeId, setNewYoutubeId] = useState("");
+  const [newCategory, setNewCategory] = useState<"vlogs" | "gaming" | "reaction" | "documentary" | "stories">("gaming");
+  const [newTitleEn, setNewTitleEn] = useState("");
+  const [newTitleAr, setNewTitleAr] = useState("");
+  const [newDescEn, setNewDescEn] = useState("");
+  const [newDescAr, setNewDescAr] = useState("");
+  const [workSubmitStatus, setWorkSubmitStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [isSubmittingWork, setIsSubmittingWork] = useState(false);
+
   // 1. Check persistent login on load
   useEffect(() => {
     const savedToken = localStorage.getItem("anes_admin_token");
@@ -163,6 +179,13 @@ export default function AdminDashboard({ currentLang, toggleLang, onBackToPortfo
         setSmtpStatus(status);
       }
 
+      // Fetch Works
+      const worksResponse = await fetch("/api/works");
+      if (worksResponse.ok) {
+        const worksData = await worksResponse.json();
+        setWorks(worksData);
+      }
+
     } catch (err) {
       console.error("Error loading dashboard data:", err);
     } finally {
@@ -223,6 +246,94 @@ export default function AdminDashboard({ currentLang, toggleLang, onBackToPortfo
       }
     } catch (err) {
       console.error("Error deleting message:", err);
+    }
+  };
+
+  // Add a Work
+  const handleAddWork = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newYoutubeId.trim() || !newTitleEn.trim() || !newTitleAr.trim() || !newDescEn.trim() || !newDescAr.trim()) {
+      setWorkSubmitStatus({
+        type: "error",
+        text: currentLang === "ar" ? "يرجى ملء جميع الحقول!" : "Please fill in all fields!"
+      });
+      return;
+    }
+
+    setIsSubmittingWork(true);
+    setWorkSubmitStatus(null);
+    const token = getActiveToken();
+
+    try {
+      const response = await fetch("/api/admin/works", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          youtubeId: newYoutubeId,
+          category: newCategory,
+          titleEn: newTitleEn,
+          titleAr: newTitleAr,
+          descEn: newDescEn,
+          descAr: newDescAr
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setWorkSubmitStatus({
+          type: "success",
+          text: currentLang === "ar" ? "تمت إضافة المقطع بنجاح!" : "Video added successfully!"
+        });
+        // Reset Form
+        setNewYoutubeId("");
+        setNewTitleEn("");
+        setNewTitleAr("");
+        setNewDescEn("");
+        setNewDescAr("");
+        // Reload works
+        setWorks(prev => [...prev, data.data]);
+      } else {
+        setWorkSubmitStatus({
+          type: "error",
+          text: data.error || (currentLang === "ar" ? "فشل الإضافة" : "Failed to add")
+        });
+      }
+    } catch (err) {
+      console.error("Error adding work:", err);
+      setWorkSubmitStatus({
+        type: "error",
+        text: currentLang === "ar" ? "حدث خطأ غير متوقع" : "An unexpected error occurred"
+      });
+    } finally {
+      setIsSubmittingWork(false);
+    }
+  };
+
+  // Delete a Work
+  const handleDeleteWork = async (id: string) => {
+    const confirmDelete = window.confirm(
+      currentLang === "ar" 
+        ? "هل أنت متأكد من حذف هذا العمل نهائياً من الموقع؟" 
+        : "Are you sure you want to delete this work permanently from the website?"
+    );
+    if (!confirmDelete) return;
+
+    const token = getActiveToken();
+    try {
+      const response = await fetch(`/api/admin/works/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      if (response.ok) {
+        setWorks(prev => prev.filter(w => w.id !== id));
+      }
+    } catch (err) {
+      console.error("Error deleting work:", err);
     }
   };
 
@@ -364,330 +475,563 @@ export default function AdminDashboard({ currentLang, toggleLang, onBackToPortfo
             </div>
           </div>
 
-          {/* Alert Status Banner */}
-          <div className="mb-8">
-            {smtpStatus.smtpConfigured ? (
-              <div className="px-5 py-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold flex items-center gap-2.5">
-                <Mail size={15} />
-                <span>
-                  {t.emailNotificationBadge} → <strong className="text-white">{smtpStatus.adminEmail}</strong>
-                </span>
-              </div>
-            ) : (
-              <div className="px-5 py-4 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-semibold leading-relaxed flex items-start gap-3">
-                <AlertTriangle size={18} className="shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-bold mb-1">{t.smtpStatusWarning}</p>
-                  <p className="text-neutral-400 font-normal">
-                    {currentLang === "ar" 
-                      ? "المتغيرات المطلوبة: SMTP_HOST و SMTP_PORT و SMTP_USER و SMTP_PASS في إعدادات التطبيق." 
-                      : "Required secrets: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS to receive direct notifications."}
-                  </p>
-                </div>
-              </div>
-            )}
+          {/* Admin Tabs */}
+          <div className="flex gap-4 mb-8 border-b border-white/10 pb-4">
+            <button
+              onClick={() => setActiveTab("requests")}
+              className={`pb-2 px-4 font-bold text-sm transition relative ${
+                activeTab === "requests"
+                  ? "text-blue-400 border-b-2 border-blue-500"
+                  : "text-neutral-400 hover:text-white cursor-pointer"
+              }`}
+            >
+              {currentLang === "ar" ? "📩 طلبات العملاء والرسائل" : "📩 Client Requests & Messages"}
+            </button>
+            <button
+              onClick={() => setActiveTab("works")}
+              className={`pb-2 px-4 font-bold text-sm transition relative ${
+                activeTab === "works"
+                  ? "text-blue-400 border-b-2 border-blue-500"
+                  : "text-neutral-400 hover:text-white cursor-pointer"
+              }`}
+            >
+              {currentLang === "ar" ? "🎬 إدارة مقاطع المعرض" : "🎬 Manage Portfolio Videos"}
+            </button>
           </div>
 
-          {/* Quick Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div className="glass-effect rounded-2xl p-5 text-center">
-              <div className="text-xs text-neutral-400 font-semibold uppercase tracking-widest mb-1">{t.totalMessages}</div>
-              <div className="text-3xl font-black text-white">{messages.length}</div>
-            </div>
-            <div className="glass-effect rounded-2xl p-5 text-center border-blue-500/20 bg-blue-500/5">
-              <div className="text-xs text-blue-400 font-semibold uppercase tracking-widest mb-1">{t.unreadCount}</div>
-              <div className="text-3xl font-black text-blue-300">{countByStatus("new")}</div>
-            </div>
-            <div className="glass-effect rounded-2xl p-5 text-center border-green-500/20 bg-green-500/5">
-              <div className="text-xs text-green-400 font-semibold uppercase tracking-widest mb-1">{t.repliedCount}</div>
-              <div className="text-3xl font-black text-green-300">{countByStatus("replied")}</div>
-            </div>
-            <div className="glass-effect rounded-2xl p-5 text-center">
-              <div className="text-xs text-neutral-400 font-semibold uppercase tracking-widest mb-1">{t.statusArchived}</div>
-              <div className="text-3xl font-black text-neutral-400">{countByStatus("archived")}</div>
-            </div>
-          </div>
-
-          {/* Main Layout Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            {/* Left Side: Message List (8 Cols) */}
-            <div className="lg:col-span-7 space-y-4">
-              
-              {/* Filter controls & search */}
-              <div className="glass-effect rounded-[20px] p-4 flex flex-col md:flex-row gap-3">
-                <div className="relative flex-1">
-                  <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500" />
-                  <input 
-                    type="text" 
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder={currentLang === "ar" ? "ابحث باسم المرسل أو محتوى الرسالة..." : "Search messages..."}
-                    className="w-full bg-black/40 border border-white/5 rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white/5 transition"
-                  />
-                </div>
-
-                <div className="flex gap-1">
-                  {["all", "new", "replied", "archived"].map((filt) => (
-                    <button
-                      key={filt}
-                      onClick={() => setStatusFilter(filt as any)}
-                      className={`px-3 py-2 rounded-lg text-xs font-semibold cursor-pointer transition ${
-                        statusFilter === filt 
-                          ? "bg-blue-600 text-white" 
-                          : "bg-white/5 text-neutral-400 hover:text-white hover:bg-white/10"
-                      }`}
-                    >
-                      {filt === "all" ? t.catAll : t[`status${filt.charAt(0).toUpperCase() + filt.slice(1)}` as keyof typeof t] || filt}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Message cards list */}
-              {isLoading && messages.length === 0 ? (
-                <div className="text-center py-20 text-neutral-500 text-sm">
-                  {currentLang === "ar" ? "جاري تحميل الرسائل..." : "Syncing inbox..."}
-                </div>
-              ) : filteredMessages.length === 0 ? (
-                <div className="glass-effect rounded-[24px] p-12 text-center text-neutral-400 text-sm">
-                  {t.noMessages}
-                </div>
-              ) : (
-                filteredMessages.map((msg) => {
-                  const isSelected = selectedMsgId === msg.id;
-                  const dateForm = new Date(msg.createdAt).toLocaleString(currentLang === "ar" ? "ar-SA" : "en-US");
-                  
-                  return (
-                    <div 
-                      key={msg.id}
-                      className={`glass-effect rounded-2xl p-6 transition duration-300 relative border ${
-                        isSelected 
-                          ? "border-blue-500/40 bg-blue-500/5 shadow-blue-500/5" 
-                          : "border-white/5 hover:border-white/15"
-                      }`}
-                    >
-                      {/* Status Badges */}
-                      <div className="absolute top-6 right-6 flex items-center gap-1.5">
-                        {msg.status === "new" && (
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded-full border border-blue-500/25">
-                            {t.statusNew}
-                          </span>
-                        )}
-                        {msg.status === "replied" && (
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-green-500/10 text-green-400 px-2.5 py-1 rounded-full border border-green-500/25">
-                            {t.statusReplied}
-                          </span>
-                        )}
-                        {msg.status === "archived" && (
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-neutral-500/10 text-neutral-400 px-2.5 py-1 rounded-full border border-neutral-500/25">
-                            {t.statusArchived}
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="mb-4">
-                        <strong className="text-lg text-white block truncate max-w-[70%]">
-                          {msg.name}
-                        </strong>
-                        <span className="text-[10px] text-neutral-500 font-mono mt-0.5 block">
-                          {dateForm}
-                        </span>
-                      </div>
-
-                      {/* Contact Info Header Accent */}
-                      <div className="text-sm font-medium text-blue-400 hover:text-blue-300 font-mono flex items-center gap-1.5 mb-4 group cursor-pointer" onClick={() => navigator.clipboard.writeText(msg.contactInfo)}>
-                        <Mail size={13} />
-                        <span>{msg.contactInfo}</span>
-                      </div>
-
-                      {/* Message Content Body */}
-                      <p className="text-neutral-300 text-sm leading-relaxed mb-6 bg-black/25 p-4 rounded-xl border border-white/5 whitespace-pre-wrap">
-                        "{msg.message}"
+          {activeTab === "requests" ? (
+            <>
+              {/* Alert Status Banner */}
+              <div className="mb-8">
+                {smtpStatus.smtpConfigured ? (
+                  <div className="px-5 py-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold flex items-center gap-2.5">
+                    <Mail size={15} />
+                    <span>
+                      {t.emailNotificationBadge} → <strong className="text-white">{smtpStatus.adminEmail}</strong>
+                    </span>
+                  </div>
+                ) : (
+                  <div className="px-5 py-4 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-semibold leading-relaxed flex items-start gap-3">
+                    <AlertTriangle size={18} className="shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold mb-1">{t.smtpStatusWarning}</p>
+                      <p className="text-neutral-400 font-normal">
+                        {currentLang === "ar" 
+                          ? "المتغيرات المطلوبة: SMTP_HOST و SMTP_PORT و SMTP_USER و SMTP_PASS في إعدادات التطبيق." 
+                          : "Required secrets: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS to receive direct notifications."}
                       </p>
+                    </div>
+                  </div>
+                )}
+              </div>
 
-                      {/* Reply Text Preview (If Replied) */}
-                      {msg.replyText && (
-                        <div className="mb-6 p-4 rounded-xl bg-green-500/5 border border-green-500/10 text-xs">
-                          <strong className="text-green-400 block mb-1">
-                            {currentLang === "ar" ? "✍️ الرد المسجل:" : "✍️ Recorded Reply:"}
-                          </strong>
-                          <p className="text-neutral-300 italic whitespace-pre-wrap">"{msg.replyText}"</p>
-                          {msg.repliedAt && (
-                            <span className="text-[10px] text-neutral-500 mt-1 block">
-                              {new Date(msg.repliedAt).toLocaleString()}
+              {/* Quick Stats Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div className="glass-effect rounded-2xl p-5 text-center">
+                  <div className="text-xs text-neutral-400 font-semibold uppercase tracking-widest mb-1">{t.totalMessages}</div>
+                  <div className="text-3xl font-black text-white">{messages.length}</div>
+                </div>
+                <div className="glass-effect rounded-2xl p-5 text-center border-blue-500/20 bg-blue-500/5">
+                  <div className="text-xs text-blue-400 font-semibold uppercase tracking-widest mb-1">{t.unreadCount}</div>
+                  <div className="text-3xl font-black text-blue-300">{countByStatus("new")}</div>
+                </div>
+                <div className="glass-effect rounded-2xl p-5 text-center border-green-500/20 bg-green-500/5">
+                  <div className="text-xs text-green-400 font-semibold uppercase tracking-widest mb-1">{t.repliedCount}</div>
+                  <div className="text-3xl font-black text-green-300">{countByStatus("replied")}</div>
+                </div>
+                <div className="glass-effect rounded-2xl p-5 text-center">
+                  <div className="text-xs text-neutral-400 font-semibold uppercase tracking-widest mb-1">{t.statusArchived}</div>
+                  <div className="text-3xl font-black text-neutral-400">{countByStatus("archived")}</div>
+                </div>
+              </div>
+
+              {/* Main Layout Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                {/* Left Side: Message List (8 Cols) */}
+                <div className="lg:col-span-7 space-y-4">
+                  
+                  {/* Filter controls & search */}
+                  <div className="glass-effect rounded-[20px] p-4 flex flex-col md:flex-row gap-3">
+                    <div className="relative flex-1">
+                      <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500" />
+                      <input 
+                        type="text" 
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        placeholder={currentLang === "ar" ? "ابحث باسم المرسل أو محتوى الرسالة..." : "Search messages..."}
+                        className="w-full bg-black/40 border border-white/5 rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white/5 transition"
+                      />
+                    </div>
+
+                    <div className="flex gap-1">
+                      {["all", "new", "replied", "archived"].map((filt) => (
+                        <button
+                          key={filt}
+                          onClick={() => setStatusFilter(filt as any)}
+                          className={`px-3 py-2 rounded-lg text-xs font-semibold cursor-pointer transition ${
+                            statusFilter === filt 
+                              ? "bg-blue-600 text-white" 
+                              : "bg-white/5 text-neutral-400 hover:text-white hover:bg-white/10"
+                          }`}
+                        >
+                          {filt === "all" ? t.catAll : t[`status${filt.charAt(0).toUpperCase() + filt.slice(1)}` as keyof typeof t] || filt}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Message cards list */}
+                  {isLoading && messages.length === 0 ? (
+                    <div className="text-center py-20 text-neutral-500 text-sm">
+                      {currentLang === "ar" ? "جاري تحميل الرسائل..." : "Syncing inbox..."}
+                    </div>
+                  ) : filteredMessages.length === 0 ? (
+                    <div className="glass-effect rounded-[24px] p-12 text-center text-neutral-400 text-sm">
+                      {t.noMessages}
+                    </div>
+                  ) : (
+                    filteredMessages.map((msg) => {
+                      const isSelected = selectedMsgId === msg.id;
+                      const dateForm = new Date(msg.createdAt).toLocaleString(currentLang === "ar" ? "ar-SA" : "en-US");
+                      
+                      return (
+                        <div 
+                          key={msg.id}
+                          className={`glass-effect rounded-2xl p-6 transition duration-300 relative border ${
+                            isSelected 
+                              ? "border-blue-500/40 bg-blue-500/5 shadow-blue-500/5" 
+                              : "border-white/5 hover:border-white/15"
+                          }`}
+                        >
+                          {/* Status Badges */}
+                          <div className="absolute top-6 right-6 flex items-center gap-1.5">
+                            {msg.status === "new" && (
+                              <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 px-2.5 py-1 rounded-full border border-blue-500/25">
+                                {t.statusNew}
+                              </span>
+                            )}
+                            {msg.status === "replied" && (
+                              <span className="text-[10px] font-bold uppercase tracking-wider bg-green-500/10 text-green-400 px-2.5 py-1 rounded-full border border-green-500/25">
+                                {t.statusReplied}
+                              </span>
+                            )}
+                            {msg.status === "archived" && (
+                              <span className="text-[10px] font-bold uppercase tracking-wider bg-neutral-500/10 text-neutral-400 px-2.5 py-1 rounded-full border border-neutral-500/25">
+                                {t.statusArchived}
+                              </span>
+                            )}
+                          </div>
+
+                          <div className="mb-4">
+                            <strong className="text-lg text-white block truncate max-w-[70%]">
+                              {msg.name}
+                            </strong>
+                            <span className="text-[10px] text-neutral-500 font-mono mt-0.5 block">
+                              {dateForm}
                             </span>
+                          </div>
+
+                          {/* Contact Info Header Accent */}
+                          <div className="text-sm font-medium text-blue-400 hover:text-blue-300 font-mono flex items-center gap-1.5 mb-4 group cursor-pointer" onClick={() => navigator.clipboard.writeText(msg.contactInfo)}>
+                            <Mail size={13} />
+                            <span>{msg.contactInfo}</span>
+                          </div>
+
+                          {/* Message Content Body */}
+                          <p className="text-neutral-300 text-sm leading-relaxed mb-6 bg-black/25 p-4 rounded-xl border border-white/5 whitespace-pre-wrap">
+                            "{msg.message}"
+                          </p>
+
+                          {/* Reply Text Preview (If Replied) */}
+                          {msg.replyText && (
+                            <div className="mb-6 p-4 rounded-xl bg-green-500/5 border border-green-500/10 text-xs">
+                              <strong className="text-green-400 block mb-1">
+                                {currentLang === "ar" ? "✍️ الرد المسجل:" : "✍️ Recorded Reply:"}
+                              </strong>
+                              <p className="text-neutral-300 italic whitespace-pre-wrap">"{msg.replyText}"</p>
+                              {msg.repliedAt && (
+                                <span className="text-[10px] text-neutral-500 mt-1 block">
+                                  {new Date(msg.repliedAt).toLocaleString()}
+                                </span>
+                              )}
+                            </div>
                           )}
-                        </div>
-                      )}
 
-                      {/* Action buttons inside card */}
-                      <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/5">
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => setSelectedMsgId(isSelected ? null : msg.id)}
-                            className={`px-4 py-2 rounded-lg text-xs font-semibold cursor-pointer transition ${
-                              isSelected 
-                                ? "bg-white/10 text-white" 
-                                : "bg-blue-600/10 text-blue-400 border border-blue-500/10 hover:bg-blue-600/20"
-                            }`}
-                          >
-                            {isSelected 
-                              ? (currentLang === "ar" ? "إغلاق التحرير" : "Close Editor") 
-                              : (currentLang === "ar" ? "فتح وإدارة" : "Open & Manage")}
-                          </button>
+                          {/* Action buttons inside card */}
+                          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/5">
+                            <div className="flex gap-2">
+                              <button
+                                onClick={() => setSelectedMsgId(isSelected ? null : msg.id)}
+                                className={`px-4 py-2 rounded-lg text-xs font-semibold cursor-pointer transition ${
+                                  isSelected 
+                                    ? "bg-white/10 text-white" 
+                                    : "bg-blue-600/10 text-blue-400 border border-blue-500/10 hover:bg-blue-600/20"
+                                }`}
+                              >
+                                {isSelected 
+                                  ? (currentLang === "ar" ? "إغلاق التحرير" : "Close Editor") 
+                                  : (currentLang === "ar" ? "فتح وإدارة" : "Open & Manage")}
+                              </button>
 
-                          {/* Quick Archive/Restore Toggle */}
-                          {msg.status !== "archived" ? (
+                              {/* Quick Archive/Restore Toggle */}
+                              {msg.status !== "archived" ? (
+                                <button
+                                  onClick={() => handleUpdateMessage(msg.id, { status: "archived" })}
+                                  className="px-3 py-2 rounded-lg bg-neutral-900 text-neutral-400 hover:text-white border border-white/5 text-xs transition cursor-pointer"
+                                  title={t.archiveRequest}
+                                >
+                                  {t.archiveRequest}
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={() => handleUpdateMessage(msg.id, { status: "new" })}
+                                  className="px-3 py-2 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 text-xs transition cursor-pointer"
+                                  title={t.restoreRequest}
+                                >
+                                  {t.restoreRequest}
+                                </button>
+                              )}
+                            </div>
+
                             <button
-                              onClick={() => handleUpdateMessage(msg.id, { status: "archived" })}
-                              className="px-3 py-2 rounded-lg bg-neutral-900 text-neutral-400 hover:text-white border border-white/5 text-xs transition cursor-pointer"
-                              title={t.archiveRequest}
+                              onClick={() => handleDeleteMessage(msg.id)}
+                              className="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 border border-red-500/10 transition cursor-pointer"
+                              title={t.deleteRequest}
                             >
-                              {t.archiveRequest}
+                              <Trash2 size={14} />
                             </button>
-                          ) : (
+                          </div>
+
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+
+                {/* Right Side: Message Detail Editor (5 Cols) */}
+                <div className="lg:col-span-5">
+                  {selectedMsgId ? (
+                    (() => {
+                      const activeMsg = messages.find(m => m.id === selectedMsgId);
+                      if (!activeMsg) return null;
+
+                      return (
+                        <div className="glass-effect rounded-[24px] p-6 space-y-6 sticky top-24 border border-blue-500/20">
+                          <div>
+                            <h2 className="text-lg font-bold text-white mb-1">
+                              {currentLang === "ar" ? "تحرير وإدارة الرد" : "Manage & Reply"}
+                            </h2>
+                            <span className="text-xs text-neutral-400 block">
+                              ID: {activeMsg.id}
+                            </span>
+                          </div>
+
+                          <div className="p-4 rounded-xl bg-black/40 border border-white/5 text-xs">
+                            <strong className="text-neutral-300 block mb-1">{t.placeholderName}:</strong>
+                            <p className="text-white font-semibold mb-3">{activeMsg.name}</p>
+
+                            <strong className="text-neutral-300 block mb-1">{t.contactLabel}:</strong>
+                            <div className="flex items-center gap-2 mb-3">
+                              <span className="text-blue-300 select-all font-mono">{activeMsg.contactInfo}</span>
+                              <button 
+                                onClick={() => navigator.clipboard.writeText(activeMsg.contactInfo)}
+                                className="p-1 rounded bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white cursor-pointer border-none text-[10px]"
+                              >
+                                {t.copiedToClipboard ? "Copy" : "Copy"}
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* 1. Email Composer Assist Helper */}
+                          <div>
+                            <a 
+                              href={`mailto:${activeMsg.contactInfo}?subject=Re: Request from ${activeMsg.name}&body=Hello ${activeMsg.name},%0D%0A%0D%0AThank you for reaching out.%0D%0A`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-white/10 transition flex items-center justify-center gap-2 cursor-pointer text-center"
+                            >
+                              <Mail size={14} />
+                              {t.composeInMail}
+                              <ExternalLink size={12} />
+                            </a>
+                          </div>
+
+                          {/* 2. Admin Reply Form */}
+                          <div className="space-y-2 pt-4 border-t border-white/5">
+                            <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider">
+                              {currentLang === "ar" ? "الرد المسجل" : "Record Admin Reply"}
+                            </label>
+                            <textarea
+                              value={replyTextMap[activeMsg.id] || ""}
+                              onChange={(e) => {
+                                const text = e.target.value;
+                                setReplyTextMap(prev => ({ ...prev, [activeMsg.id]: text }));
+                              }}
+                              placeholder={t.replyPlaceholder}
+                              rows={4}
+                              className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white/5 transition text-white resize-none"
+                            ></textarea>
+                            
                             <button
-                              onClick={() => handleUpdateMessage(msg.id, { status: "new" })}
-                              className="px-3 py-2 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 text-xs transition cursor-pointer"
-                              title={t.restoreRequest}
+                              onClick={() => handleUpdateMessage(activeMsg.id, { 
+                                replyText: replyTextMap[activeMsg.id],
+                                status: "replied"
+                              })}
+                              className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md transition cursor-pointer flex items-center justify-center gap-1.5"
                             >
-                              {t.restoreRequest}
+                              <CheckCircle size={14} />
+                              {saveStatus[activeMsg.id] === "saved" ? t.replySavedSuccess : t.sendReplyBtn}
                             </button>
-                          )}
+                          </div>
+
+                          {/* 3. Admin Notes Form */}
+                          <div className="space-y-2 pt-4 border-t border-white/5">
+                            <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider">
+                              {currentLang === "ar" ? "ملاحظات سرية (للمشرف فقط)" : "Internal Admin Notes"}
+                            </label>
+                            <textarea
+                              value={adminNotesText[activeMsg.id] || ""}
+                              onChange={(e) => {
+                                const text = e.target.value;
+                                setAdminNotesText(prev => ({ ...prev, [activeMsg.id]: text }));
+                              }}
+                              placeholder={t.adminNotesPlaceholder}
+                              rows={2}
+                              className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white/5 transition text-white resize-none"
+                            ></textarea>
+
+                            <button
+                              onClick={() => handleUpdateMessage(activeMsg.id, { adminNotes: adminNotesText[activeMsg.id] })}
+                              className="w-full py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-300 border border-white/10 font-bold text-xs transition cursor-pointer"
+                            >
+                              {saveStatus[activeMsg.id] === "saved" ? t.notesSavedSuccess : t.saveNotesBtn}
+                            </button>
+                          </div>
+
                         </div>
-
-                        <button
-                          onClick={() => handleDeleteMessage(msg.id)}
-                          className="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 border border-red-500/10 transition cursor-pointer"
-                          title={t.deleteRequest}
-                        >
-                          <Trash2 size={14} />
-                        </button>
-                      </div>
-
+                      );
+                    })()
+                  ) : (
+                    <div className="glass-effect rounded-[24px] p-8 text-center text-neutral-400 text-xs py-16 space-y-4">
+                      <FileText className="mx-auto text-neutral-600" size={32} />
+                      <p>
+                        {currentLang === "ar" 
+                          ? "اختر أي رسالة من القائمة لعرض أدوات الرد وتسجيل الملاحظات الإدارية." 
+                          : "Select a client message from the inbox to open detailed reply and notes tools."}
+                      </p>
                     </div>
-                  );
-                })
-              )}
-            </div>
+                  )}
+                </div>
 
-            {/* Right Side: Message Detail Editor (5 Cols) */}
-            <div className="lg:col-span-5">
-              {selectedMsgId ? (
-                (() => {
-                  const activeMsg = messages.find(m => m.id === selectedMsgId);
-                  if (!activeMsg) return null;
-
-                  return (
-                    <div className="glass-effect rounded-[24px] p-6 space-y-6 sticky top-24 border border-blue-500/20">
-                      <div>
-                        <h2 className="text-lg font-bold text-white mb-1">
-                          {currentLang === "ar" ? "تحرير وإدارة الرد" : "Manage & Reply"}
-                        </h2>
-                        <span className="text-xs text-neutral-400 block">
-                          ID: {activeMsg.id}
-                        </span>
-                      </div>
-
-                      <div className="p-4 rounded-xl bg-black/40 border border-white/5 text-xs">
-                        <strong className="text-neutral-300 block mb-1">{t.placeholderName}:</strong>
-                        <p className="text-white font-semibold mb-3">{activeMsg.name}</p>
-
-                        <strong className="text-neutral-300 block mb-1">{t.contactLabel}:</strong>
-                        <div className="flex items-center gap-2 mb-3">
-                          <span className="text-blue-300 select-all font-mono">{activeMsg.contactInfo}</span>
-                          <button 
-                            onClick={() => navigator.clipboard.writeText(activeMsg.contactInfo)}
-                            className="p-1 rounded bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white cursor-pointer border-none text-[10px]"
-                          >
-                            {t.copiedToClipboard ? "Copy" : "Copy"}
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* 1. Email Composer Assist Helper */}
-                      <div>
-                        <a 
-                          href={`mailto:${activeMsg.contactInfo}?subject=Re: Request from ${activeMsg.name}&body=Hello ${activeMsg.name},%0D%0A%0D%0AThank you for reaching out.%0D%0A`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-white/10 transition flex items-center justify-center gap-2 cursor-pointer text-center"
-                        >
-                          <Mail size={14} />
-                          {t.composeInMail}
-                          <ExternalLink size={12} />
-                        </a>
-                      </div>
-
-                      {/* 2. Admin Reply Form */}
-                      <div className="space-y-2 pt-4 border-t border-white/5">
-                        <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider">
-                          {currentLang === "ar" ? "الرد المسجل" : "Record Admin Reply"}
-                        </label>
-                        <textarea
-                          value={replyTextMap[activeMsg.id] || ""}
-                          onChange={(e) => {
-                            const text = e.target.value;
-                            setReplyTextMap(prev => ({ ...prev, [activeMsg.id]: text }));
-                          }}
-                          placeholder={t.replyPlaceholder}
-                          rows={4}
-                          className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white/5 transition text-white resize-none"
-                        ></textarea>
-                        
-                        <button
-                          onClick={() => handleUpdateMessage(activeMsg.id, { 
-                            replyText: replyTextMap[activeMsg.id],
-                            status: "replied"
-                          })}
-                          className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md transition cursor-pointer flex items-center justify-center gap-1.5"
-                        >
-                          <CheckCircle size={14} />
-                          {saveStatus[activeMsg.id] === "saved" ? t.replySavedSuccess : t.sendReplyBtn}
-                        </button>
-                      </div>
-
-                      {/* 3. Admin Notes Form */}
-                      <div className="space-y-2 pt-4 border-t border-white/5">
-                        <label className="block text-xs font-semibold text-neutral-400 uppercase tracking-wider">
-                          {currentLang === "ar" ? "ملاحظات سرية (للمشرف فقط)" : "Internal Admin Notes"}
-                        </label>
-                        <textarea
-                          value={adminNotesText[activeMsg.id] || ""}
-                          onChange={(e) => {
-                            const text = e.target.value;
-                            setAdminNotesText(prev => ({ ...prev, [activeMsg.id]: text }));
-                          }}
-                          placeholder={t.adminNotesPlaceholder}
-                          rows={2}
-                          className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:bg-white/5 transition text-white resize-none"
-                        ></textarea>
-
-                        <button
-                          onClick={() => handleUpdateMessage(activeMsg.id, { adminNotes: adminNotesText[activeMsg.id] })}
-                          className="w-full py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-300 border border-white/10 font-bold text-xs transition cursor-pointer"
-                        >
-                          {saveStatus[activeMsg.id] === "saved" ? t.notesSavedSuccess : t.saveNotesBtn}
-                        </button>
-                      </div>
-
-                    </div>
-                  );
-                })()
-              ) : (
-                <div className="glass-effect rounded-[24px] p-8 text-center text-neutral-400 text-xs py-16 space-y-4">
-                  <FileText className="mx-auto text-neutral-600" size={32} />
-                  <p>
-                    {currentLang === "ar" 
-                      ? "اختر أي رسالة من القائمة لعرض أدوات الرد وتسجيل الملاحظات الإدارية." 
-                      : "Select a client message from the inbox to open detailed reply and notes tools."}
+              </div>
+            </>
+          ) : (
+            // Works/Videos Management layout Tab
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Form to Add New Video Work */}
+              <div className="lg:col-span-5 glass-effect rounded-[24px] p-6 space-y-5 border border-white/10">
+                <div>
+                  <h2 className="text-xl font-bold text-white mb-1">
+                    {currentLang === "ar" ? "➕ إضافة فيديو جديد" : "➕ Add New Portfolio Video"}
+                  </h2>
+                  <p className="text-xs text-neutral-400">
+                    {currentLang === "ar" ? "املأ الحقول التالية لنشر فيديو مباشرة على واجهة الموقع" : "Fill details to publish video directly onto the website"}
                   </p>
                 </div>
-              )}
-            </div>
 
-          </div>
+                <form onSubmit={handleAddWork} className="space-y-4 text-start">
+                  
+                  {/* YouTube ID Input */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-neutral-400 uppercase tracking-wider block">
+                      {currentLang === "ar" ? "معرّف يوتيوب (YouTube Video ID)" : "YouTube Video ID"}
+                    </label>
+                    <input
+                      type="text"
+                      value={newYoutubeId}
+                      onChange={(e) => setNewYoutubeId(e.target.value)}
+                      placeholder="e.g. Bq_0sZUpGyM"
+                      required
+                      className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500 transition"
+                    />
+                    <span className="text-[10px] text-neutral-500 block">
+                      {currentLang === "ar" ? "الرمز الموجود في نهاية رابط اليوتيوب بعد v=" : "The code at the end of the YouTube URL after v="}
+                    </span>
+                  </div>
+
+                  {/* Category Dropdown Selection */}
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-neutral-400 uppercase tracking-wider block">
+                      {currentLang === "ar" ? "التصنيف (الكاتغوري)" : "Category"}
+                    </label>
+                    <select
+                      value={newCategory}
+                      onChange={(e: any) => setNewCategory(e.target.value)}
+                      className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500 transition"
+                    >
+                      <option value="gaming">{currentLang === "ar" ? t.catGaming : t.catGaming}</option>
+                      <option value="vlogs">{currentLang === "ar" ? t.catVlogs : t.catVlogs}</option>
+                      <option value="reaction">{currentLang === "ar" ? t.catReaction : t.catReaction}</option>
+                      <option value="documentary">{currentLang === "ar" ? t.catDocumentary : t.catDocumentary}</option>
+                      <option value="stories">{currentLang === "ar" ? t.catStories : t.catStories}</option>
+                    </select>
+                  </div>
+
+                  {/* English Fields Header */}
+                  <div className="pt-2 border-t border-white/5">
+                    <span className="text-xs font-semibold text-blue-400">{currentLang === "ar" ? "التفاصيل بالإنجليزية (English Details)" : "English Details"}</span>
+                  </div>
+
+                  {/* English Title */}
+                  <div className="space-y-1.5">
+                    <input
+                      type="text"
+                      value={newTitleEn}
+                      onChange={(e) => setNewTitleEn(e.target.value)}
+                      placeholder="Video Title in English"
+                      required
+                      className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500 transition"
+                    />
+                  </div>
+
+                  {/* English Description */}
+                  <div className="space-y-1.5">
+                    <input
+                      type="text"
+                      value={newDescEn}
+                      onChange={(e) => setNewDescEn(e.target.value)}
+                      placeholder="Short Description in English"
+                      required
+                      className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500 transition"
+                    />
+                  </div>
+
+                  {/* Arabic Fields Header */}
+                  <div className="pt-2 border-t border-white/5">
+                    <span className="text-xs font-semibold text-blue-400">{currentLang === "ar" ? "التفاصيل بالعربية" : "Arabic Details"}</span>
+                  </div>
+
+                  {/* Arabic Title */}
+                  <div className="space-y-1.5" dir="rtl">
+                    <input
+                      type="text"
+                      value={newTitleAr}
+                      onChange={(e) => setNewTitleAr(e.target.value)}
+                      placeholder="عنوان الفيديو بالعربية"
+                      required
+                      className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500 transition text-right"
+                    />
+                  </div>
+
+                  {/* Arabic Description */}
+                  <div className="space-y-1.5" dir="rtl">
+                    <input
+                      type="text"
+                      value={newDescAr}
+                      onChange={(e) => setNewDescAr(e.target.value)}
+                      placeholder="وصف مختصر بالعربية"
+                      required
+                      className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500 transition text-right"
+                    />
+                  </div>
+
+                  {/* Status & Submit */}
+                  {workSubmitStatus && (
+                    <p className={`text-xs font-semibold py-1 ${workSubmitStatus.type === "success" ? "text-green-400" : "text-red-400"}`}>
+                      {workSubmitStatus.text}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={isSubmittingWork}
+                    className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-xl shadow-blue-500/10 transition flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    {isSubmittingWork ? (currentLang === "ar" ? "جاري الإضافة..." : "Adding...") : (currentLang === "ar" ? "نشر الفيديو في المعرض" : "Publish Video to Portfolio")}
+                  </button>
+
+                </form>
+              </div>
+
+              {/* List of Existing Videos to Manage */}
+              <div className="lg:col-span-7 space-y-4">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="text-lg font-bold text-white">
+                    {currentLang === "ar" ? `🎬 الفيديوهات المنشورة (${works.length})` : `🎬 Published Videos (${works.length})`}
+                  </h3>
+                </div>
+
+                {works.length === 0 ? (
+                  <div className="glass-effect rounded-[24px] p-12 text-center text-neutral-400 text-sm">
+                    {currentLang === "ar" ? "لا توجد فيديوهات حالياً!" : "No videos found!"}
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {works.map((work) => {
+                      const categoryTranslation = t[`cat${work.category.charAt(0).toUpperCase() + work.category.slice(1)}` as keyof typeof t] || work.category;
+                      return (
+                        <div key={work.id} className="glass-effect rounded-2xl overflow-hidden border border-white/5 hover:border-white/15 transition flex flex-col justify-between">
+                          
+                          {/* Video Thumbnail Preview */}
+                          <div className="relative aspect-video bg-neutral-900 group">
+                            <img
+                              src={`https://img.youtube.com/vi/${work.youtubeId}/hqdefault.jpg`}
+                              alt={work.titleEn}
+                              className="w-full h-full object-cover"
+                              referrerPolicy="no-referrer"
+                            />
+                            <div className="absolute top-2.5 right-2.5 bg-black/80 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-white/10 text-blue-400">
+                              {categoryTranslation}
+                            </div>
+                          </div>
+
+                          {/* Content */}
+                          <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
+                            <div>
+                              {/* Titles */}
+                              <div className="space-y-1">
+                                <h4 className="text-sm font-bold text-white line-clamp-1">
+                                  {work.titleEn}
+                                </h4>
+                                <h4 className="text-xs font-semibold text-neutral-300 line-clamp-1 text-right" dir="rtl">
+                                  {work.titleAr}
+                                </h4>
+                              </div>
+
+                              {/* Descriptions */}
+                              <div className="pt-2 text-[11px] text-neutral-400 space-y-1 border-t border-white/5 mt-2">
+                                <p className="line-clamp-1">{work.descEn}</p>
+                                <p className="line-clamp-1 text-right" dir="rtl">{work.descAr}</p>
+                              </div>
+                            </div>
+
+                            {/* Delete Button */}
+                            <div className="pt-3 border-t border-white/5 mt-3 flex justify-between items-center">
+                              <span className="text-[10px] text-neutral-500 font-mono">
+                                ID: {work.youtubeId}
+                              </span>
+                              <button
+                                onClick={() => handleDeleteWork(work.id)}
+                                className="px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/15 text-xs transition cursor-pointer flex items-center gap-1"
+                              >
+                                <Trash2 size={12} />
+                                {currentLang === "ar" ? "حذف" : "Delete"}
+                              </button>
+                            </div>
+
+                          </div>
+
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+            </div>
+          )}
 
         </div>
       )}
