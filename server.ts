@@ -106,11 +106,49 @@ function writeMessages(messages: Message[]) {
   }
 }
 
+function extractYoutubeId(input: string): string {
+  if (!input) return "";
+  const trimmed = input.trim();
+  // Regular expression to extract the ID from various YouTube URL formats
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
+  const match = trimmed.match(regExp);
+  if (match && match[2] && match[2].length === 11) {
+    return match[2];
+  }
+  if (trimmed.length === 11) {
+    return trimmed;
+  }
+  try {
+    const url = new URL(trimmed);
+    const v = url.searchParams.get("v");
+    if (v && v.length === 11) {
+      return v;
+    }
+  } catch (e) {
+    // ignore
+  }
+  return trimmed;
+}
+
 // Helpers for Reading/Writing Works
 function readWorks(): any[] {
   try {
     const data = fs.readFileSync(WORKS_FILE, "utf-8");
-    return JSON.parse(data);
+    const works = JSON.parse(data);
+    let modified = false;
+    const sanitizedWorks = works.map((w: any) => {
+      const sanitizedId = extractYoutubeId(w.youtubeId);
+      if (sanitizedId !== w.youtubeId) {
+        modified = true;
+        return { ...w, youtubeId: sanitizedId };
+      }
+      return w;
+    });
+
+    if (modified) {
+      writeWorks(sanitizedWorks);
+    }
+    return sanitizedWorks;
   } catch (error) {
     console.error("Error reading works file:", error);
     return [];
@@ -357,9 +395,11 @@ app.post("/api/admin/works", adminAuth, (req, res) => {
     return res.status(400).json({ error: "All fields are required" });
   }
 
+  const sanitizedYoutubeId = extractYoutubeId(youtubeId);
+
   const newWork = {
     id: "work_" + Math.random().toString(36).substr(2, 9),
-    youtubeId: youtubeId.trim(),
+    youtubeId: sanitizedYoutubeId,
     titleEn: titleEn.trim(),
     titleAr: titleAr.trim(),
     descEn: descEn.trim(),
