@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الإدارة | Anes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* الثيم الزجاجي الأساسي */
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neon-blue: #3b82f6;
+            --dark-bg: #05050a;
+        }
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .ambient-background {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            background: radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 50%);
+            filter: blur(80px);
+        }
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+        input, button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 1rem;
+        }
+        button {
+            background: var(--neon-blue);
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+            transition: 0.3s;
+        }
+        button:hover {
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        .message-card {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            text-align: right;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        #dashboard { display: none; width: 90%; max-width: 800px; }
+    </style>
+</head>
+<body>
+    <div class="ambient-background"></div>
+
+    <!-- شاشة تسجيل الدخول -->
+    <div class="glass-panel" id="login-screen">
+        <h2>🔒 تسجيل الدخول للإدارة</h2>
+        <p>أدخل كلمة المرور للوصول إلى الرسائل</p>
+        <input type="password" id="admin-pass" placeholder="كلمة المرور...">
+        <button onclick="checkPassword()">دخول</button>
+        <p id="error-msg" style="color: #ff4444; display: none;">كلمة المرور خاطئة!</p>
+    </div>
+
+    <!-- لوحة عرض الرسائل -->
+    <div class="glass-panel" id="dashboard" style="display: none;">
+        <h2>الرسائل الواردة 📥</h2>
+        <button onclick="logout()" style="background: #ff4444; width: auto; padding: 5px 15px; margin-bottom: 20px;">تسجيل الخروج</button>
+        <div id="messages-container">
+            <p style="color: gray;">جاري تحميل الرسائل...</p>
+        </div>
+    </div>
+
+    <!-- أكواد Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // ⚠️ هنا تضع إعدادات Firebase الخاصة بك
+        const firebaseConfig = {
+            apiKey: "ضع_الكود_هنا",
+            authDomain: "ضع_الكود_هنا",
+            projectId: "ضع_الكود_هنا",
+            storageBucket: "ضع_الكود_هنا",
+            messagingSenderId: "ضع_الكود_هنا",
+            appId: "ضع_الكود_هنا"
+        };
+
+        let db;
+        try {
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+        } catch (e) {
+            console.log("Firebase not configured yet.");
+        }
+
+        window.checkPassword = function() {
+            const pass = document.getElementById('admin-pass').value;
+            if(pass === 'chatti17') {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                loadMessages();
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        };
+
+        window.logout = function() {
+            document.getElementById('login-screen').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('admin-pass').value = '';
+        };
+
+        async function loadMessages() {
+            const container = document.getElementById('messages-container');
+            if(!db) {
+                container.innerHTML = "<p>يرجى إضافة إعدادات Firebase في الكود لتعمل الرسائل.</p>";
+                return;
+            }
+            try {
+                const q = query(collection(db, "messages"), orderBy("timestamp", "desc"));
+                const querySnapshot = await getDocs(q);
+                container.innerHTML = '';
+                
+                if(querySnapshot.empty) {
+                    container.innerHTML = "<p>لا توجد رسائل جديدة.</p>";
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    container.innerHTML += `
+                        <div class="message-card">
+                            <h3 style="margin-top:0; color: #3b82f6;">${data.name}</h3>
+                            <p style="font-size:0.9em; color: gray;">📞 ${data.contact}</p>
+                            <p>${data.message}</p>
+                        </div>
+                    `;
+                });
+            } catch (e) {
+                container.innerHTML = "<p>حدث خطأ في جلب الرسائل. تأكد من صلاحيات Firebase.</p>";
+            }
+        }
+    </script>
+</body>
+</html>
