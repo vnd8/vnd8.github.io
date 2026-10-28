@@ -1,6 +1,6 @@
 {
-  "name": "Anes Portfolio",
-  "description": "Anes Cinematic Video Editor Portfolio with Admin Management Panel and Email Notifications",
+  "name": "vndpro v12.0 - Premiere Pro Plugin & Setup.exe Studio",
+  "description": "Adobe Premiere Pro 2026 Native Spectrum Plugin (vndpro v12.0) featuring Ultra-Fast Silence Cutter with Interactive Waveform & Auto-Zoom, Multi-Clip Synchronizer, Word-by-Word Animated Captions, Face & Point Motion Tracker, Bezier Motion Curves, Auto-Updater, Settings & Activity Reports, and 1-Click Setup.exe / Installer Generator.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
